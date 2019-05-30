@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.53 with theme Tranquilpeak 0.4.3-SNAPSHOT">
+<meta name="author" content="Guangyao Liu">
+<meta name="keywords" content="">
+<meta name="description" content="WebGL === 3D ?
+
+这是最常见的一个误解。MDN上的WebGL入门教程开篇第一句话就是：
+
+
+WebGL enables web content to use an API based on OpenGL ES 2.0 to perform 3D rendering in an HTML canvas in browsers that support it without the use of plug-ins.
+">
+
+
+<meta property="og:description" content="WebGL === 3D ?
+
+这是最常见的一个误解。MDN上的WebGL入门教程开篇第一句话就是：
+
+
+WebGL enables web content to use an API based on OpenGL ES 2.0 to perform 3D rendering in an HTML canvas in browsers that support it without the use of plug-ins.
+">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Webgl Part2">
+<meta name="twitter:title" content="Webgl Part2">
+<meta property="og:url" content="http://brilliun.com/2015/10/webgl-part2/">
+<meta property="twitter:url" content="http://brilliun.com/2015/10/webgl-part2/">
+<meta property="og:site_name" content="Brilliun&#39;s Blog">
+<meta property="og:description" content="WebGL === 3D ?
+
+这是最常见的一个误解。MDN上的WebGL入门教程开篇第一句话就是：
+
+
+WebGL enables web content to use an API based on OpenGL ES 2.0 to perform 3D rendering in an HTML canvas in browsers that support it without the use of plug-ins.
+">
+<meta name="twitter:description" content="WebGL === 3D ?
+
+这是最常见的一个误解。MDN上的WebGL入门教程开篇第一句话就是：
+
+
+WebGL enables web content to use an API based on OpenGL ES 2.0 to perform 3D rendering in an HTML canvas in browsers that support it without the use of plug-ins.
+">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2015-10-03T22:41:51">
+  
+  
+    <meta property="article:modified_time" content="2015-10-03T22:41:51">
+  
+  
+  
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@brilliun">
+
+
+  <meta name="twitter:creator" content="@brilliun">
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="http://brilliun.com/images/myprofile.jpg">
+  <meta property="twitter:image" content="http://brilliun.com/images/myprofile.jpg">
+
+
+    <title>Webgl Part2</title>
+
+    <link rel="icon" href="http://brilliun.com/favicon.ico">
+    
+
+    
+
+    <link rel="canonical" href="http://brilliun.com/2015/10/webgl-part2/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="http://brilliun.com/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="http://brilliun.com/">Brilliun&#39;s Blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="http://brilliun.com/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="http://brilliun.com/images/myprofile.jpg" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="http://brilliun.com/#about">
+          <img class="sidebar-profile-picture" src="http://brilliun.com/images/myprofile.jpg" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Guangyao Liu</h4>
+        
+          <h5 class="sidebar-profile-bio">A father of two girls.</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/brilliun" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/">
+    
+      
+      
+      <span class="sidebar-button-desc"></span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Webgl Part2
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2015-10-03T22:41:51&#43;09:00">
+        
+  October 3, 2015
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>WebGL === 3D ?</p>
+
+<p>这是最常见的一个误解。MDN上的<a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Tutorial/Getting_started_with_WebGL">WebGL入门教程</a>开篇第一句话就是：</p>
+
+<blockquote>
+<p>WebGL enables web content to use an API based on OpenGL ES 2.0 to perform 3D rendering in an HTML canvas in browsers that support it without the use of plug-ins.</p>
+</blockquote>
+
+<p>随意在网上搜索一下WebGL的介绍和入门，经常就会看到一切就这么从一个转个不停的3D立方体开始了，一个初学者的脑中就这样被植入了一个3D图像的印象。之后的一系列应用实例或者API介绍也都离不开这样一些主题：旋转，跳跃，再来一束强光造个影什么的。另一方面，那些能够登上HN或者reddit的夺人眼球的WebGL作品，几乎是清一色的3D游戏。最终导致了WebGL等同于3D的认识。</p>
+
+<p>这样的认识也确实没有错，有了WebGL，在浏览器里渲染3D图像变得更方便了。但也只是更方便了。在正反两个方面都并非绝对排他的。
+首先，没有WebGL，哪怕用Canvas 2D的API，只要你有这个闲工夫，撇开性能因素不谈，实现和WebGL的渲染效果一样的3D效果完全是可行的。
+反过来，WebGL并不止能用来渲染3D图像，包括OpenGL在内的GL系API的实质其实也是为了在2D平面上渲染图像，既然3D空间中的对象可以通过API映射到这个2D平面上，那么2D空间中的对象更不成问题了不是么。</p>
+
+<p>所以，抛开3D这张面具，WebGL也可以很“平易近人”。毕竟2D内容依然是现有站点的主流，如果能够在2D内容的渲染上方便的运用，WebGL的实用价值就大大提升了。唯一的问题是，这并不容易。</p>
+
+<p>要说清楚为什么用WebGL来渲染2D图像很不容易，首先看下面这张图</p>
+
+<p><img src="http://brilliun.com/images/webgl/vector_raster.gif" alt="https://signalizenj.wordpress.com/2015/01/29/vector-vs-raster/" /></p>
+
+<p>所谓的2D图像一般可以分为两类，一类是以矢量为基本元素的vector graphics（矢量图），另一类是以像素为基本元素的raster graphics（位图）。</p>
+
+<p>在WebGL出现之前，普遍的在网页中绘制2D图像的手段无非有CSS，SVG，Canvas 2D API这几种，其中又只有Canvas 2D API能够通过js做到实时的控制。使用Canvas 2D，无论是矢量图还是位图都很容易绘制，因为各自都有现成的专用API：</p>
+
+<pre><code class="language-javascript">var canvas = document.getElementById(&quot;myCanvas&quot;);
+var ctx = canvas.getContext(&quot;2d&quot;);
+ctx.beginPath();
+ctx.moveTo(x1, y1);
+ctx.lineTo(x2, y2);
+ctx.quadraticCurveTo(x3, y3, x4, y4);
+ctx.stroke();
+ctx.fill();
+</code></pre>
+
+<p>用类似这样的一组API，把矢量的轮廓（直线或曲线）描一遍，最后fill一下，再复杂的图形都能一举填充完成。</p>
+
+<pre><code class="language-javascript">var canvas = document.getElementById(&quot;myCanvas&quot;);
+var ctx = canvas.getContext(&quot;2d&quot;);
+ctx.drawImage(
+  img,
+  srcX, srcY,
+  srcWidth,
+  srcHeight,
+  x, y,
+  width, 
+  height
+);
+</code></pre>
+
+<p>位图更简单了，四个顶点一确定，一个长方形的位图就能画出来了。</p>
+
+<p>相比之下，WebGL的API基本就是OpenGL API的翻版，有相关知识的都知道，这套API从开始就不是为了画矢量图而设计的。WebGL中的绘图API（又称为draw call）只有下面两个</p>
+
+<pre><code class="language-javascript">var canvas = document.getElementById(&quot;myCanvas&quot;);
+var gl = canvas.getContext(&quot;webgl&quot;);
+gl.drawArrays(mode, first, count);
+gl.drawElements(mode, count, type, offset);
+</code></pre>
+
+<p>而这里的<code>mode</code>有哪些选择呢：</p>
+
+<ul>
+<li>gl.POINTS</li>
+<li>gl.LINES</li>
+<li>gl.LINE_LOOP</li>
+<li>gl.LINE_STRIP</li>
+<li>gl.TRIANGLES</li>
+<li>gl.TRIANGLE_STRIP</li>
+<li>gl.TRIANGLE_FAN</li>
+</ul>
+
+<p>总结起来就三种模式：画点，画直线，画三角形。</p>
+
+<p>要用如此单调的API来绘制2D图像是怎么样一种体验呢，先看简单的位图。</p>
+
+<p><img src="http://brilliun.com/images/webgl/raster_by_webgl.png" alt="WebGL绘制位图" /></p>
+
+<p>位图的轮廓必然是长方形，因此如上图，方法就是把这个长方形沿对角线看成是由两个三角形拼接而成的，然后用WebGL中画三角形的API画出这两个三角形并为每个点指定它在原图中的坐标作为纹理坐标，最后上传这张位图作为铺设在这两个三角形上的纹理即可。</p>
+
+<p>下面再来看矢量图：</p>
+
+<p><img src="http://brilliun.com/images/webgl/vector_by_webgl.png" alt="WebGL绘制矢量图(红点为矢量顶点" /></p>
+
+<p>这样一个不规则且包含曲线的轮廓，无论是单纯描边还是填充颜色，要怎样通过画点，画直线，或者画三角形的API来完成呢？</p>
+
+<p>一个最直观的想法就是事先把所有要用的矢量图全部转换成位图，但矢量图所具有的多项优点也就随之丧失：</p>
+
+<ul>
+<li>首先，矢量图本身没有分辨率（图像尺寸）的定义，因此可以自然的适应各种尺寸需求而不影响画质。</li>
+<li>其次，因为不需要像位图那样描述每一个像素的颜色，矢量图的文件大小要远小于位图</li>
+<li>最后，许多现有资源都会依赖矢量图，如swf文件等。</li>
+</ul>
+
+<p><img src="http://brilliun.com/images/webgl/VectorBitmapExample.png" alt="矢量图的分辨率优势（This work is a derivative of a photo(https://commons.wikimedia.org/wiki/File%3AVectorBitmapExample.svg) by Darth Stabro, used under CC BY-SA.）" /></p>
+
+<p>那么其他那些web上的图像／动画制作的渲染引擎是如何解决这个问题的呢？这里我列举三个知名度较高的，同时支持WebGL的渲染引擎来对比。</p>
+
+<h4 id="createjs">CreateJS</h4>
+
+<p>CreateJS在2014年就较早的<a href="http://blog.createjs.com/webgl-support-easeljs/">宣布</a>在满足条件的浏览器内支持使用WebGL而不是一直以来的Canvas 2D来渲染2D图像。但仔细看这篇介绍就会发现它的支持是有限的，原因是它只支持在渲染<strong>位图</strong>的时候使用WebGL，也就是我在上文介绍的将长方形切割成两个三角形的简单方法。</p>
+
+<p>这样一种位图用WebGL，矢量图用Canvas 2D的策略<a href="http://blog.createjs.com/webgl-support-easeljs/">据称</a>已经能带来可观的性能提升了。但是需要注意的是这带来了一个副作用。</p>
+
+<p>熟悉HTML Canvas的读者应该都知道，网页中一个单个的canvas元素可以且仅可以通过<code>canvas.getContext()</code>生成一种绘图模式，2D的<code>CanvasRenderingContext2D</code>或是WebGL的<code>WebGLRenderingContext</code>。无论哪一种，一旦生成一次之后再也无法在同一个canvas元素上生成另一种。这意味着，在使用CreateJS的时候，一旦一个场景中既使用了位图又使用了矢量图，这两类图像是绝对无法被绘制在同一个canvas元素里的。CreateJS也<a href="http://blog.createjs.com/webgl-support-easeljs/">承认</a>了，在这种情况下需要使用它们称之为「Layered Renderers”」的方法，通俗点说就是在一个canvas上再叠加一个canvas，一个专门用WebGL，一个专门用Canvas 2D。</p>
+
+<p><img src="http://brilliun.com/images/webgl/createjs.png" alt="Layered renderers" /></p>
+
+<p>那么，熟悉浏览器运行机制的读者很容易就发现了，这样的叠加极有可能给浏览器本身的渲染引擎带来额外的负担，尤其当处在上层的canvas包含一些半透明图像的时候，在一定程度上浏览器的渲染性能会受到影响。</p>
+
+<h4 id="pixi-js">pixi.js</h4>
+
+<p>这是另一个在业内也颇有名气的2D动画／游戏制作引擎，并且也在最近的几个版本开始了优先使用WebGL的支持。首先，pixi.js并不限定仅仅在位图的渲染时使用WebGL，在矢量图上他们的开发者也做了不小的<a href="http://www.goodboydigital.com/pixi-js-v1-6-0-in-da-house/">努力</a>。</p>
+
+<p>pixi.js用WebGL渲染矢量图的方法核心是借助stencil buffer。在<a href="http://www.cs.sun.ac.za/~lvzijl/courses/rw778/grafika/OpenGLtuts/Big/graphicsnotes014.html">这篇文章</a>中的相关小节有对这个方法的详细解说。</p>
+
+<p><img src="http://brilliun.com/images/webgl/pixijs.png" alt="http://www.cs.sun.ac.za/~lvzijl/courses/rw778/grafika/OpenGLtuts/Big/graphicsnotes014.html" /></p>
+
+<p>这种方法的优点很明显，就是可以轻松的应对各种复杂的多边形，但同时它的缺点也很明显。</p>
+
+<p>首先，上图中的B，C，E，G，H区域虽然在最终的渲染结果中不会显现，但是在渲染的过程中，这些区域中的像素其实也经历了大部分的渲染流程并在stencil buffer记录下了相应的数值，这整个过程就占用了GPU的计算资源。</p>
+
+<p>再有，不仅仅是这些看不见的区域，上图中大部分的区域其实都被重复性的渲染了若干次，最终留下那些被渲染了奇数次的像素们。这又是对GPU等相关计算资源的不小的浪费。</p>
+
+<p>最后，stencil buffer并不是WebGL标准里的必须配置，也就是说，要使用这种方法必须首先确保用户所用的浏览器和硬件支持stencil buffer。</p>
+
+<h4 id="three-js">three.js</h4>
+
+<p>在一定程度上，提到WebGL就不得不提three.js，甚至在很多人眼里要用WebGL就必须用three.js。作为一个“正统派”的WebGL库，three.js的API主要还是针对3D应用而设计，但是他们同时也对那些非主流的需要用WebGL绘制2D图像的用户提供了相应的基本支持，并且他们的做法是我个人更欣赏的直接了当的一种选择：既然WebGL几乎只能画三角形，那就把所有其他的图形都切割成由三角形组成的。这个过程称为triangulation</p>
+
+<p><img src="http://brilliun.com/images/webgl/triangulation.gif" alt="http://mathworld.wolfram.com/Triangulation.html" /></p>
+
+<p>但是three.js提供的triangulation的API有一定的局限性，具体来说就是构成这个图形的所有向量的顶点必须被分为两大个子集来传递给这个API，这两个子集分别是外围轮廓上的点和内部轮廓（内部的洞，穴的轮廓）。但在实际应用中要满足这一点要求并不总是很容易。特别是通过其他2D制作软件绘制的图形直接输出向量后在传递给three.js来调用WebGL渲染前，要逐个分析确认每个图形是否包含“洞”，如果包含就必须把内外向量分开，事情就变得复杂无比。</p>
+
+<h3 id="tesspathy">Tesspathy</h3>
+
+<p><img src="http://brilliun.com/images/webgl/tesspathy_logo.jpg" alt="Tesspathy" /></p>
+
+<p>除了上面介绍的这些方法外，我在实际项目中为了解决这个问题还自己写了一个开源项目，名为<a href="http://gree.github.io/tesspathy/">Tesspathy</a>。项目的地址是<a href="https://github.com/gree/tesspathy">https://github.com/gree/tesspathy</a></p>
+
+<p>Tesspathy是一个将2D矢量图形切割成由三角形的矢量图的工具，它有别于现有其他类似工具的特点有：</p>
+
+<ul>
+<li>不对原始数据设置前提要求和区分（轮廓点的顺时针／逆时针方向，单个或多个图形的集合，是否有洞，哪些向量是洞等等）</li>
+<li>不仅能切割直线轮廓的多边形，而且能切割含有曲线轮廓的图形（目前版本暂只支持quadratic Bezier曲线）</li>
+<li>曲线仍然保持曲线形式而非分割成细小的三角形，因此切割后仍是完全不依赖分辨率的矢量图形。</li>
+<li>不仅能切割填充图形，还能用于切割直线和曲线</li>
+</ul>
+
+<p>来看一个实际的例子。下图是一个由矢量线段和曲线构成的包含“洞”的图形：</p>
+
+<p><img src="http://brilliun.com/images/webgl/tesspathy_1.png" alt="切割前" /></p>
+
+<p>为了能使用WebGL渲染它，我们用Tesspathy将其转换（切割）成完全有三角形构成的矢量图：</p>
+
+<p><img src="http://brilliun.com/images/webgl/tesspathy_2.png" alt="切割后" /></p>
+
+<p>这样最后只需将这些三角形传递给WebGL的API即可用WebGL来渲染2D矢量图像了。特别注意这里的曲线并没有被切割成大量细小的三角形，这也就意味着即使被放大至较高的分辨率也不需要进行再次的切割。感兴趣的读者可以自己动手<a href="http://gree.github.io/tesspathy/demos/drawing_pad/">实际尝试</a>一下上面这个例子。</p>
+
+<p>看到这里也许有人会问，费这么大劲用这么复杂的方式画2D图像太别扭太奇怪了，既然这样为什么不干脆从一开始就用Canvas 2D的API而非要走WebGL这条路？</p>
+
+<p>这里面有两个问题需要阐释。</p>
+
+<p>首先，用这种“大费周章“的方式画2D图像一点也不奇怪，因为浏览器的渲染引擎就是这么做的。Canvas 2D的API之所以看上去那么简洁好用，是因为渲染引擎在内部帮助完成了实际的极为复杂的渲染流程。</p>
+
+<p>口说无凭，来看看Chrome的渲染引擎Skia的<a href="https://skia.googlesource.com/skia/+/master/src/gpu/batches/">相关代码</a>：</p>
+
+<p><img src="http://brilliun.com/images/webgl/skia.png" alt="Source code of Skia&quot; %}
+" /></p>
+
+<p>在这个目录下包含了用于渲染矢量图形（Path）的各类“预处理“，之所以说各类是因为作为Skia这样一个关键的浏览器渲染引擎，对性能的追求是极为严苛的，因此开发者分别针对的是不同条件的矢量图形做了优化，选择最适合的预处理方式。比如，当一个图形是完全Convex的多边形时，可以跳过很多繁琐的步骤而直接利用GL系API中的GL_TRIANGLE_FAN来直接渲染。</p>
+
+<p>尤其值得一提的是<a href="https://skia.googlesource.com/skia/+/master/src/gpu/batches/GrTessellatingPathRenderer.cpp">GrTessellatingPathRenderer.cpp</a>这个文件，其中的内容就是对于没有特定特征的任意矢量图形将其切割成三角形的组合。是不是很眼熟？这正是上文提到的<a href="http://gree.github.io/tesspathy/">Tesspathy</a>所做的工作。至于为什么既然浏览器已经替我们完成了这部分工作（并且是用C++而非JS）还要用Tesspathy来自己动手呢？详细的原因会在下一篇中阐述，但概括起来就是两个字：性能。</p>
+
+<p>你逗我呢在浏览器里跑的C++代码性能会输给在客户端沙盒里运行的JS？我这里所指的性能并非切割三角形的性能，而是最终的图像渲染性能。用Tesspathy＋WebGL的方式渲染2D矢量图像的性能可以大大超过用原生Canvas 2D并开启硬件加速（即在Skia中切割三角形从而调用底层OpenGL或Direct3D进行渲染）的方式，为此我专门做了一个<a href="http://gree.github.io/tesspathy/demos/canvas_vs_webgl/">Demo</a>来实际比较两者的差别，尤其在手机上二者的差距应该更为明显。(由于HTML5的canvas元素的渲染模式无法热切换，在Demo中更换模式时请先刷新一次页面)</p>
+
+<p>关于WebGL以及原生Canvas 2D的性能问题我会在下一篇中具体阐释。</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="http://brilliun.com/2015/10/webgl-part3/" data-tooltip="Webgl Part3">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="http://brilliun.com/2015/10/webgl-part1/" data-tooltip="Webgl Part1">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://brilliun.com/2015/10/webgl-part2/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://brilliun.com/2015/10/webgl-part2/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Guangyao Liu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="http://brilliun.com/2015/10/webgl-part3/" data-tooltip="Webgl Part3">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="http://brilliun.com/2015/10/webgl-part1/" data-tooltip="Webgl Part1">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://brilliun.com/2015/10/webgl-part2/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://brilliun.com/2015/10/webgl-part2/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fbrilliun.com%2F2015%2F10%2Fwebgl-part2%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http%3A%2F%2Fbrilliun.com%2F2015%2F10%2Fwebgl-part2%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="http://brilliun.com/images/myprofile.jpg" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Guangyao Liu</h4>
+    
+      <div id="about-card-bio">A father of two girls.</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Software Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Tokyo, Japan
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2018/06/implementation-of-api-pagination/">
+                <h3 class="media-heading">Implementation of Api Pagination</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Overview Stable pagination is not a silver bullet. Consider sites like Reddit and Hacker News. Their pagination is inherently unstable: items are sorted by a volatile ranking, frequently moving up and down the list over time. How do they deal with it? They don&rsquo;t.
+Both sites frequently showcases how bad it can look by showing duplicate items as you advance pages. It&rsquo;s not all that bad, because neither site subscribes to the infinite scrolling crowd (yet?</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2018/05/designing-data-intensive-applications-part1/">
+                <h3 class="media-heading">Designing Data Intensive Applications Part1</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">CH01. Reliable, Scalable, and Maintainable Applications About Data System We can think of any kind of databases, queues, or caches as a data system. Nowadays, these tools are optimized for a variety of different uses, and they no longer neatly fit into their origin categories
+For example, there are data stores that are also used as message queues (Redis), and there are message queues with database-like durability guarantees (Apache Kafka).</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2018/04/the-innodb-storage-engine/">
+                <h3 class="media-heading">The Innodb Storage Engine</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Starting from MySQL 5.5.5, the default storage engine for new tables is InnoDB rather than MyISAM.
+Multi-Version Concurrency Control (MVCC) This technique lets InnoDB transactions with certain isolation levels perform consistent read operations; that is, to query rows that are being updated by other transactions, and see the values from before those updates occurred. This is a powerful technique to increase concurrency, by allowing queries to proceed without waiting due to locks held by the other transactions.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/06/git-cleanup-local-branches-merged/">
+                <h3 class="media-heading">Git Cleanup Local Branches Merged</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">TL;DR $ git branch --merged develop | egrep -v &quot;(^\*|master|dev)&quot; | xargs -n 1 git branch -d  BTW git branch --no-merged  can be used to check the branches to keep.
+Breakdown 1. Find branches merged # list up branches merged into 'develop' git branch --merged develop  OR
+# list up branches merged into current branch git branch --merged  2. Exclude critical branches # Exclude branches with prefix of &quot;*&quot;(current), &quot;master&quot;, or &quot;dev&quot; egrep -v &quot;(^\*|master|dev)&quot;  **egrep is equivalent to grep -E</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/05/python-notes/">
+                <h3 class="media-heading">Python Notes</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">1. Numeric Values &gt;&gt;&gt; 17 // 3 # floor division 5 &gt;&gt;&gt; 17 % 3 # remainder 2 &gt;&gt;&gt; 2 ** 7 # 2 to the power of 7 128  2. Strings  Unlike other languages, special characters such as \n have the same meaning with both single ('...') and double (&quot;...&quot;) quotes. The only difference between the two is that within single quotes you don’t need to escape &quot; (but you have to escape \') and vice versa.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/02/ssl-vs-ssh/">
+                <h3 class="media-heading">Ssl vs Ssh</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Concepts  SSL: Secure Sockets Layer
+TLS: Transport Layer Security (TLS is the name of the IETF protocol standard that grew out of SSL 3.0)
+HTTPS: HyperText Transfer Protocol over SSL/TLS
+SSH: Secure Shell
+ HTTPS is the secure replacement for HTTP, while SSH is the secure replacement for Telnet.
+Similarity  Both SSH and SSL use symmetric cryptography to preserve the confidentiality of transmitted data. They both use asymmetric cryptography a.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/02/algorithms-and-data-structures/">
+                <h3 class="media-heading">Algorithms and Data Structures</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Time Complexity Usually only the worst-case running time is considered because:
+ it gives an upper bound For many situations, the worst case occurs fairly often. (Eg. searching for items which may frequently be absent) The average case is often as bad as worst case (:TO-CHECK:)  To easily describe the performance of an algorithm, we usually use order of growth, e.g., O(n^2).
+Sorting Algorithms Comparison of sorting algorithms</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/01/how-browsers-work/">
+                <h3 class="media-heading">How Browsers Work</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Prior Knowledge There are 3 main tasks for a browser to execute a web application:
+ Fetching resources Page layout and rendering Javascript execution  Browsers And Browser Kernels Comparison of web browser engines
+(WebKit)  Web layout engine: WebCore Javascript engine: JavascriptCore  Chrome  Web layout engine: Blink  Originally forked from WebCore, a component of WebKit  Javascript engine: V8  Safari  Web layout engine: WebCore Javascript engine: JavascriptCore  later evolved to Nitro, which compiles JavaScript into native machine code   Firefox  Web layout engine: Gecko Javascript engine: SpiderMonkey  Microsoft Edge  Web layout engine: EdgeHTML  forked from Trident, the engine of IE  Javascript engine: Chakra  Fetching Resources Prior Knowledge URL And URI Socket IP Protocol MAC Address Fetching from Cache Given the URL of a resource on the web, the browser starts by checking its local and application caches.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/01/tips-for-coding-interviews/">
+                <h3 class="media-heading">Tips for Coding Interviews</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Primer  When target is string, confirm whether it&rsquo;s ASCII, which at most has 256 possible characters. So use space to boost time performance.
+ whenever only flags or booleans in an array, use bit vector instead for better space complexity.
+ For linked list problems, usually a pair of slow pointer and fast pointer would be a nice try.gb
+  Tree Depth/Height  To get the height (from leaf) of each node in a binary tree, use following recursive code:  function getHeight(TreeNode curr) { if (curr == null) return 0; return Math.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2016/12/high-performance-browser-networking/">
+                <h3 class="media-heading">High Performance Browser Networking</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2016
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Ch01. Primer on Latency and Bandwidth  Latency
+The time from the source sending a packet to the destination receiving it
+Bandwidth
+Maximum throughput of a logical or physical communication path
+ Latency, not bandwidth, is the performance bottleneck for most web‐ sites!
+To increase bandwidth, while it might not be cheap, we have multiple strategies available, like adding more fiber links.
+Improving latency, on the other hand, is a very different story.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         14 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('http://brilliun.com/images/mycover.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="http://brilliun.com/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'http:\/\/brilliun.com\/2015\/10\/webgl-part2\/';
+          
+            this.page.identifier = '\/2015\/10\/webgl-part2\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'brilliun';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

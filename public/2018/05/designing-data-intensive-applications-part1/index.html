@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.53 with theme Tranquilpeak 0.4.3-SNAPSHOT">
+<meta name="author" content="Guangyao Liu">
+<meta name="keywords" content="">
+<meta name="description" content="CH01. Reliable, Scalable, and Maintainable Applications About Data System We can think of any kind of databases, queues, or caches as a data system. Nowadays, these tools are optimized for a variety of different uses, and they no longer neatly fit into their origin categories
+For example, there are data stores that are also used as message queues (Redis), and there are message queues with database-like durability guarantees (Apache Kafka).">
+
+
+<meta property="og:description" content="CH01. Reliable, Scalable, and Maintainable Applications About Data System We can think of any kind of databases, queues, or caches as a data system. Nowadays, these tools are optimized for a variety of different uses, and they no longer neatly fit into their origin categories
+For example, there are data stores that are also used as message queues (Redis), and there are message queues with database-like durability guarantees (Apache Kafka).">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Designing Data Intensive Applications Part1">
+<meta name="twitter:title" content="Designing Data Intensive Applications Part1">
+<meta property="og:url" content="http://brilliun.com/2018/05/designing-data-intensive-applications-part1/">
+<meta property="twitter:url" content="http://brilliun.com/2018/05/designing-data-intensive-applications-part1/">
+<meta property="og:site_name" content="Brilliun&#39;s Blog">
+<meta property="og:description" content="CH01. Reliable, Scalable, and Maintainable Applications About Data System We can think of any kind of databases, queues, or caches as a data system. Nowadays, these tools are optimized for a variety of different uses, and they no longer neatly fit into their origin categories
+For example, there are data stores that are also used as message queues (Redis), and there are message queues with database-like durability guarantees (Apache Kafka).">
+<meta name="twitter:description" content="CH01. Reliable, Scalable, and Maintainable Applications About Data System We can think of any kind of databases, queues, or caches as a data system. Nowadays, these tools are optimized for a variety of different uses, and they no longer neatly fit into their origin categories
+For example, there are data stores that are also used as message queues (Redis), and there are message queues with database-like durability guarantees (Apache Kafka).">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2018-05-14T22:22:54">
+  
+  
+    <meta property="article:modified_time" content="2018-05-14T22:22:54">
+  
+  
+  
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@brilliun">
+
+
+  <meta name="twitter:creator" content="@brilliun">
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="http://brilliun.com/images/myprofile.jpg">
+  <meta property="twitter:image" content="http://brilliun.com/images/myprofile.jpg">
+
+
+    <title>Designing Data Intensive Applications Part1</title>
+
+    <link rel="icon" href="http://brilliun.com/favicon.ico">
+    
+
+    
+
+    <link rel="canonical" href="http://brilliun.com/2018/05/designing-data-intensive-applications-part1/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="http://brilliun.com/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="http://brilliun.com/">Brilliun&#39;s Blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="http://brilliun.com/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="http://brilliun.com/images/myprofile.jpg" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="http://brilliun.com/#about">
+          <img class="sidebar-profile-picture" src="http://brilliun.com/images/myprofile.jpg" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Guangyao Liu</h4>
+        
+          <h5 class="sidebar-profile-bio">A father of two girls.</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/brilliun" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/">
+    
+      
+      
+      <span class="sidebar-button-desc"></span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Designing Data Intensive Applications Part1
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-05-14T22:22:54&#43;09:00">
+        
+  May 14, 2018
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              
+
+<h1 id="table-of-contents">Table of Contents</h1><nav id="TableOfContents">
+<ul>
+<li><a href="#ch01-reliable-scalable-and-maintainable-applications">CH01. Reliable, Scalable, and Maintainable Applications</a>
+<ul>
+<li><a href="#about-data-system">About Data System</a></li>
+<li><a href="#scalability-load-and-performance">Scalability, Load, and Performance</a></li>
+<li><a href="#twitter-s-example">Twitter&rsquo;s Example</a></li>
+<li><a href="#latency-and-response-time">Latency and Response Time</a></li>
+<li><a href="#approaches-for-scaling-up">Approaches for Scaling Up</a></li>
+</ul></li>
+<li><a href="#ch02-data-models-and-query-languages">CH02. Data Models and Query Languages</a>
+<ul>
+<li><a href="#relational-model-vs-document-model">Relational Model vs. Document Model</a>
+<ul>
+<li><a href="#dominance-of-relational-model">Dominance of Relational Model</a></li>
+<li><a href="#the-birth-of-nosql">The Birth of NoSQL</a></li>
+<li><a href="#the-object-relational-mismatch">The Object-Relational Mismatch</a></li>
+<li><a href="#many-to-one-and-many-to-many-relationships">Many-to-one and Many-to-many Relationships</a></li>
+<li><a href="#schemaless">Schemaless</a></li>
+<li><a href="#data-locality-for-queries">Data Locality for Queries</a></li>
+</ul></li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul></li>
+<li><a href="#ch03-storage-and-retrieval">CH03. Storage and Retrieval</a></li>
+</ul>
+</nav>
+
+<h1 id="ch01-reliable-scalable-and-maintainable-applications">CH01. Reliable, Scalable, and Maintainable Applications</h1>
+
+<h2 id="about-data-system">About Data System</h2>
+
+<p>We can think of any kind of databases, queues, or caches as a data system. Nowadays, these tools are optimized for a variety of different uses, and they no longer neatly fit into their origin categories</p>
+
+<p>For example, there are data stores that are also used as message queues (Redis), and there are message queues with database-like durability guarantees (Apache Kafka). The boundaries between the categories are becoming blurred.</p>
+
+<h2 id="scalability-load-and-performance">Scalability, Load, and Performance</h2>
+
+<p>Load can be described with a few numbers which we call load parameters. The best choice of parameters depends on the architecture of your system: it may be requests per second to a web server, the ratio of reads to writes in a database, the number of simultaneously active users in a chat room, the hit rate on a cache, or something else.</p>
+
+<h2 id="twitter-s-example">Twitter&rsquo;s Example</h2>
+
+<p>Two of Twitter&rsquo;s main operations are 1) <em>post tweet</em> and 2) <em>home timeline</em>, and there are two ways to implement them:</p>
+
+<ol>
+<li><p>Posting a tweet simply inserts the new tweet into a global collection of tweets. When a user requests their home timeline, look up all the people they follow, find all the tweets for each of those users, and merge them (sorted by time). In a relational database, you could write a query such as:
+<code>SELECT tweets.*, users.* FROM tweets
+JOIN users ON tweets.sender_id = users.id
+JOIN follows ON follows.followee_id = users.id
+WHERE follows.follower_id = current_user;</code></p></li>
+
+<li><p>Maintain a cache for each user’s home timeline — like a mailbox of tweets for each recipient user. When a user posts a tweet, look up all the people who follow that user, and insert the new tweet into each of their home timeline caches. The request to read the home timeline is then cheap, because its result has been computed ahead of time.</p></li>
+</ol>
+
+<p>The first version of Twitter used approach 1, but the systems struggled to keep up with the load of home timeline queries, so the company switched to approach 2. This works better because the average rate of published tweets is almost two orders of magnitude lower than the rate of home timeline reads, and so in this case it’s preferable to do more work at write time and less at read time.</p>
+
+<p>However, the downside of approach 2 is that posting a tweet now requires a lot of extra work. On average, a tweet is delivered to about 75 followers, so 4.6k tweets per second become 345k writes per second to the home timeline caches. But this average hides the fact that the number of followers per user varies wildly, and some users have over 30 million followers. This means that a single tweet may result in over 30 million writes to home timelines! Doing this in a timely manner — Twitter tries to deliver tweets to followers within five seconds — is a significant challenge. In the example of Twitter, the distribution of followers per user (maybe weighted by how often those users tweet) is a key load parameter for discussing scalability, since it determines the fan-out load. Your application may have very different characteristics, but you can apply similar principles to reasoning about its load.</p>
+
+<p>The final twist of the Twitter anecdote: now that approach 2 is robustly implemented, Twitter is moving to a hybrid of both approaches. Most users’ tweets continue to be fanned out to home timelines at the time when they are posted, but a small number of users with a very large number of followers (i.e., celebrities) are excepted from this fan-out. Tweets from any celebrities that a user may follow are fetched separately and merged with that user’s home timeline when it is read, like in approach 1. This hybrid approach is able to deliver consistently good performance.</p>
+
+<h2 id="latency-and-response-time">Latency and Response Time</h2>
+
+<p>In a batch processing system such as Hadoop, we usually care about throughput — the number of records we can process per second, or the total time it takes to run a job on a dataset of a certain size.iii In online systems, what’s usually more important is the service’s response time — that is, the time between a client sending a request and receiving a response.</p>
+
+<p>Latency and response time are often used synonymously, but they are not the same. The response time is what the client sees: besides the actual time to process the request (the service time), it includes network delays and queueing delays. Latency is the duration that a request is waiting to be handled — during which it is latent, awaiting service.</p>
+
+<h2 id="approaches-for-scaling-up">Approaches for Scaling Up</h2>
+
+<p>While distributing stateless services across multiple machines is fairly straightforward, taking stateful data systems from a single node to a distributed setup can introduce a lot of additional complexity. For this reason, common wisdom until recently was to keep your database on a single node (scale up) until scaling cost or high- availability requirements forced you to make it distributed.</p>
+
+<h1 id="ch02-data-models-and-query-languages">CH02. Data Models and Query Languages</h1>
+
+<p>In a complex application there may be many intermediary levels, such as underlying databases, application-specific models, APIs, and even APIs built upon APIs, but the basic idea is the same: each layer hides the complexity of the layers below it by providing a clean data model.</p>
+
+<p>This chapter is talking about a range of general-purpose data models for <strong>data storage</strong> and <strong>querying</strong>. They are the <strong>relational model</strong>, the <strong>document model</strong>, and the <strong>graph-based data model</strong>.</p>
+
+<h2 id="relational-model-vs-document-model">Relational Model vs. Document Model</h2>
+
+<h3 id="dominance-of-relational-model">Dominance of Relational Model</h3>
+
+<p>In early times, other databases forced application developers to think a lot about the internal representation of the data in the database, while the goal of the relational model was to hide that implementation detail behind a cleaner interface. So relational model turns out to generalize very well, beyond their original scope of business data processing, to a broad variety of use cases, making it the most widely used database until today.</p>
+
+<h3 id="the-birth-of-nosql">The Birth of NoSQL</h3>
+
+<p>There are several driving forces behind the adoption of NoSQL databases, including:</p>
+
+<ul>
+<li>A need for greater scalability than relational databases can easily achieve, including very large datasets or very high write throughput * A widespread preference for free and open source software over commercial database products</li>
+<li>Specialized query operations that are not well supported by the relational model</li>
+<li>Frustration with the restrictiveness of relational schemas, and a desire for a more dynamic and expressive data model</li>
+</ul>
+
+<h3 id="the-object-relational-mismatch">The Object-Relational Mismatch</h3>
+
+<p>Most application development today is done in object-oriented programming languages, which leads to a common criticism of the SQL data model: if data is stored in relational tables, an awkward translation layer is required between the objects in the application code and the database model of tables, rows, and columns. The disconnect between the models is sometimes called an impedance mismatch.</p>
+
+<p>Object-relational mapping (ORM) frameworks like ActiveRecord and Hibernate reduce the amount of boilerplate code required for this translation layer, but they can’t completely hide the differences between the two models.</p>
+
+<p>For a data structure like a resume, which is mostly a self-contained document, a JSON representation can be quite appropriate. It has better locality than the multi-table schema. If you want to fetch a resume in the relational example, you need to either perform multiple queries (query each table by user_id) or perform a messy multi-way join between the users table and its subordinate tables. In the JSON representation, all the relevant information is in one place, and one query is sufficient.</p>
+
+<h3 id="many-to-one-and-many-to-many-relationships">Many-to-one and Many-to-many Relationships</h3>
+
+<p>Database normalization requires many-to-one relationships, which don&rsquo;t fit nicely into the document model. In relational databases, it is normal to refer to rows in other tables by ID, because joins are easy. In document databases, support for joins is often weak, sometimes you even need to emulate a join in application code by making multiple queries.</p>
+
+<p>It’s possible to reduce the need for joins by denormalizing, but then the application code needs to do additional work to keep the denormalized data consistent. Joins can be emulated in application code by making multiple requests to the database, but that also moves complexity into the application and is usually slower than a join performed by specialized code inside the database. In such cases, using a document model can lead to significantly more complex application code and worse performance</p>
+
+<h3 id="schemaless">Schemaless</h3>
+
+<p>Document databases are sometimes called <em>schemaless</em>, while in relational databases, schema changes have a bad reputation of being slow and requiring downtime. This reputation is not entirely deserved: most relational database systems execute the <code>ALTER TABLE</code> statement in a few milliseconds. MySQL is a notable exception — it copies the entire table on <code>ALTER TABLE</code>, which can mean minutes or even hours of downtime when altering a large table.</p>
+
+<h3 id="data-locality-for-queries">Data Locality for Queries</h3>
+
+<p>A document is usually stored as a single continuous string, encoded as JSON, XML, or a binary variant thereof (such as MongoDB’s BSON). If your application often needs to access the entire document (for example, to render it on a web page), there is a performance advantage to this storage locality. If data is split across multiple tables, multiple index lookups are required to retrieve it all, which may require more disk seeks and take more time.</p>
+
+<p>The locality advantage only applies if you need large parts of the document at the same time. The database typically needs to load the entire document, even if you access only a small portion of it, which can be wasteful on large documents. On updates to a document, the entire document usually needs to be rewritten — only modifications that don’t change the encoded size of a document can easily be performed in place. For these reasons, it is generally recommended that you keep documents fairly small and avoid writes that increase the size of a document. These performance limitations significantly reduce the set of situations in which document databases are useful.</p>
+
+<p>It’s worth pointing out that the idea of grouping related data together for locality is not limited to the document model. For example, Google’s Spanner database offers the same locality properties in a relational data model, by allowing the schema to declare that a table’s rows should be interleaved (nested) within a parent table.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>The main arguments in favor of the document data model are schema flexibility, better performance due to locality, and that for some applications it is closer to the data structures used by the application. The relational model counters by providing better support for joins, and many-to-one and many-to-many relationships.</p>
+
+<h1 id="ch03-storage-and-retrieval">CH03. Storage and Retrieval</h1>
+
+<p>Why should application developers care how the database handles storage and retrieval internally? Because there is a big difference between storage engines that are optimized for transactional workloads and those that are optimized for analytics.</p>
+
+<p>There are two families of commonly used storage engines: <em>log-structured storage engines</em>, and <em>page-oriented storage engines</em> such as B-trees.</p>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="http://brilliun.com/2018/06/implementation-of-api-pagination/" data-tooltip="Implementation of Api Pagination">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="http://brilliun.com/2018/04/the-innodb-storage-engine/" data-tooltip="The Innodb Storage Engine">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://brilliun.com/2018/05/designing-data-intensive-applications-part1/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://brilliun.com/2018/05/designing-data-intensive-applications-part1/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Guangyao Liu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="http://brilliun.com/2018/06/implementation-of-api-pagination/" data-tooltip="Implementation of Api Pagination">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="http://brilliun.com/2018/04/the-innodb-storage-engine/" data-tooltip="The Innodb Storage Engine">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://brilliun.com/2018/05/designing-data-intensive-applications-part1/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://brilliun.com/2018/05/designing-data-intensive-applications-part1/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fbrilliun.com%2F2018%2F05%2Fdesigning-data-intensive-applications-part1%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http%3A%2F%2Fbrilliun.com%2F2018%2F05%2Fdesigning-data-intensive-applications-part1%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="http://brilliun.com/images/myprofile.jpg" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Guangyao Liu</h4>
+    
+      <div id="about-card-bio">A father of two girls.</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Software Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Tokyo, Japan
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2018/06/implementation-of-api-pagination/">
+                <h3 class="media-heading">Implementation of Api Pagination</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Overview Stable pagination is not a silver bullet. Consider sites like Reddit and Hacker News. Their pagination is inherently unstable: items are sorted by a volatile ranking, frequently moving up and down the list over time. How do they deal with it? They don&rsquo;t.
+Both sites frequently showcases how bad it can look by showing duplicate items as you advance pages. It&rsquo;s not all that bad, because neither site subscribes to the infinite scrolling crowd (yet?</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2018/05/designing-data-intensive-applications-part1/">
+                <h3 class="media-heading">Designing Data Intensive Applications Part1</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">CH01. Reliable, Scalable, and Maintainable Applications About Data System We can think of any kind of databases, queues, or caches as a data system. Nowadays, these tools are optimized for a variety of different uses, and they no longer neatly fit into their origin categories
+For example, there are data stores that are also used as message queues (Redis), and there are message queues with database-like durability guarantees (Apache Kafka).</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2018/04/the-innodb-storage-engine/">
+                <h3 class="media-heading">The Innodb Storage Engine</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Starting from MySQL 5.5.5, the default storage engine for new tables is InnoDB rather than MyISAM.
+Multi-Version Concurrency Control (MVCC) This technique lets InnoDB transactions with certain isolation levels perform consistent read operations; that is, to query rows that are being updated by other transactions, and see the values from before those updates occurred. This is a powerful technique to increase concurrency, by allowing queries to proceed without waiting due to locks held by the other transactions.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/06/git-cleanup-local-branches-merged/">
+                <h3 class="media-heading">Git Cleanup Local Branches Merged</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">TL;DR $ git branch --merged develop | egrep -v &quot;(^\*|master|dev)&quot; | xargs -n 1 git branch -d  BTW git branch --no-merged  can be used to check the branches to keep.
+Breakdown 1. Find branches merged # list up branches merged into 'develop' git branch --merged develop  OR
+# list up branches merged into current branch git branch --merged  2. Exclude critical branches # Exclude branches with prefix of &quot;*&quot;(current), &quot;master&quot;, or &quot;dev&quot; egrep -v &quot;(^\*|master|dev)&quot;  **egrep is equivalent to grep -E</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/05/python-notes/">
+                <h3 class="media-heading">Python Notes</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">1. Numeric Values &gt;&gt;&gt; 17 // 3 # floor division 5 &gt;&gt;&gt; 17 % 3 # remainder 2 &gt;&gt;&gt; 2 ** 7 # 2 to the power of 7 128  2. Strings  Unlike other languages, special characters such as \n have the same meaning with both single ('...') and double (&quot;...&quot;) quotes. The only difference between the two is that within single quotes you don’t need to escape &quot; (but you have to escape \') and vice versa.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/02/ssl-vs-ssh/">
+                <h3 class="media-heading">Ssl vs Ssh</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Concepts  SSL: Secure Sockets Layer
+TLS: Transport Layer Security (TLS is the name of the IETF protocol standard that grew out of SSL 3.0)
+HTTPS: HyperText Transfer Protocol over SSL/TLS
+SSH: Secure Shell
+ HTTPS is the secure replacement for HTTP, while SSH is the secure replacement for Telnet.
+Similarity  Both SSH and SSL use symmetric cryptography to preserve the confidentiality of transmitted data. They both use asymmetric cryptography a.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/02/algorithms-and-data-structures/">
+                <h3 class="media-heading">Algorithms and Data Structures</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Time Complexity Usually only the worst-case running time is considered because:
+ it gives an upper bound For many situations, the worst case occurs fairly often. (Eg. searching for items which may frequently be absent) The average case is often as bad as worst case (:TO-CHECK:)  To easily describe the performance of an algorithm, we usually use order of growth, e.g., O(n^2).
+Sorting Algorithms Comparison of sorting algorithms</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/01/how-browsers-work/">
+                <h3 class="media-heading">How Browsers Work</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Prior Knowledge There are 3 main tasks for a browser to execute a web application:
+ Fetching resources Page layout and rendering Javascript execution  Browsers And Browser Kernels Comparison of web browser engines
+(WebKit)  Web layout engine: WebCore Javascript engine: JavascriptCore  Chrome  Web layout engine: Blink  Originally forked from WebCore, a component of WebKit  Javascript engine: V8  Safari  Web layout engine: WebCore Javascript engine: JavascriptCore  later evolved to Nitro, which compiles JavaScript into native machine code   Firefox  Web layout engine: Gecko Javascript engine: SpiderMonkey  Microsoft Edge  Web layout engine: EdgeHTML  forked from Trident, the engine of IE  Javascript engine: Chakra  Fetching Resources Prior Knowledge URL And URI Socket IP Protocol MAC Address Fetching from Cache Given the URL of a resource on the web, the browser starts by checking its local and application caches.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/01/tips-for-coding-interviews/">
+                <h3 class="media-heading">Tips for Coding Interviews</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Primer  When target is string, confirm whether it&rsquo;s ASCII, which at most has 256 possible characters. So use space to boost time performance.
+ whenever only flags or booleans in an array, use bit vector instead for better space complexity.
+ For linked list problems, usually a pair of slow pointer and fast pointer would be a nice try.gb
+  Tree Depth/Height  To get the height (from leaf) of each node in a binary tree, use following recursive code:  function getHeight(TreeNode curr) { if (curr == null) return 0; return Math.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2016/12/high-performance-browser-networking/">
+                <h3 class="media-heading">High Performance Browser Networking</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2016
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Ch01. Primer on Latency and Bandwidth  Latency
+The time from the source sending a packet to the destination receiving it
+Bandwidth
+Maximum throughput of a logical or physical communication path
+ Latency, not bandwidth, is the performance bottleneck for most web‐ sites!
+To increase bandwidth, while it might not be cheap, we have multiple strategies available, like adding more fiber links.
+Improving latency, on the other hand, is a very different story.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         14 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('http://brilliun.com/images/mycover.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="http://brilliun.com/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'http:\/\/brilliun.com\/2018\/05\/designing-data-intensive-applications-part1\/';
+          
+            this.page.identifier = '\/2018\/05\/designing-data-intensive-applications-part1\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'brilliun';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

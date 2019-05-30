@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.53 with theme Tranquilpeak 0.4.3-SNAPSHOT">
+<meta name="author" content="Guangyao Liu">
+<meta name="keywords" content="">
+<meta name="description" content="Ch01. Primer on Latency and Bandwidth  Latency
+The time from the source sending a packet to the destination receiving it
+Bandwidth
+Maximum throughput of a logical or physical communication path
+ Latency, not bandwidth, is the performance bottleneck for most web‐ sites!
+To increase bandwidth, while it might not be cheap, we have multiple strategies available, like adding more fiber links.
+Improving latency, on the other hand, is a very different story.">
+
+
+<meta property="og:description" content="Ch01. Primer on Latency and Bandwidth  Latency
+The time from the source sending a packet to the destination receiving it
+Bandwidth
+Maximum throughput of a logical or physical communication path
+ Latency, not bandwidth, is the performance bottleneck for most web‐ sites!
+To increase bandwidth, while it might not be cheap, we have multiple strategies available, like adding more fiber links.
+Improving latency, on the other hand, is a very different story.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="High Performance Browser Networking">
+<meta name="twitter:title" content="High Performance Browser Networking">
+<meta property="og:url" content="http://brilliun.com/2016/12/high-performance-browser-networking/">
+<meta property="twitter:url" content="http://brilliun.com/2016/12/high-performance-browser-networking/">
+<meta property="og:site_name" content="Brilliun&#39;s Blog">
+<meta property="og:description" content="Ch01. Primer on Latency and Bandwidth  Latency
+The time from the source sending a packet to the destination receiving it
+Bandwidth
+Maximum throughput of a logical or physical communication path
+ Latency, not bandwidth, is the performance bottleneck for most web‐ sites!
+To increase bandwidth, while it might not be cheap, we have multiple strategies available, like adding more fiber links.
+Improving latency, on the other hand, is a very different story.">
+<meta name="twitter:description" content="Ch01. Primer on Latency and Bandwidth  Latency
+The time from the source sending a packet to the destination receiving it
+Bandwidth
+Maximum throughput of a logical or physical communication path
+ Latency, not bandwidth, is the performance bottleneck for most web‐ sites!
+To increase bandwidth, while it might not be cheap, we have multiple strategies available, like adding more fiber links.
+Improving latency, on the other hand, is a very different story.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2016-12-14T22:38:02">
+  
+  
+    <meta property="article:modified_time" content="2017-12-14T22:38:02">
+  
+  
+  
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@brilliun">
+
+
+  <meta name="twitter:creator" content="@brilliun">
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="http://brilliun.com/images/myprofile.jpg">
+  <meta property="twitter:image" content="http://brilliun.com/images/myprofile.jpg">
+
+
+    <title>High Performance Browser Networking</title>
+
+    <link rel="icon" href="http://brilliun.com/favicon.ico">
+    
+
+    
+
+    <link rel="canonical" href="http://brilliun.com/2016/12/high-performance-browser-networking/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="http://brilliun.com/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="http://brilliun.com/">Brilliun&#39;s Blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="http://brilliun.com/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="http://brilliun.com/images/myprofile.jpg" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="http://brilliun.com/#about">
+          <img class="sidebar-profile-picture" src="http://brilliun.com/images/myprofile.jpg" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Guangyao Liu</h4>
+        
+          <h5 class="sidebar-profile-bio">A father of two girls.</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/brilliun" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/">
+    
+      
+      
+      <span class="sidebar-button-desc"></span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      High Performance Browser Networking
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2016-12-14T22:38:02&#43;09:00">
+        
+  December 14, 2016
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              
+
+<h1 id="table-of-contents">Table of Contents</h1><nav id="TableOfContents">
+<ul>
+<li><a href="#ch01-primer-on-latency-and-bandwidth">Ch01. Primer on Latency and Bandwidth</a></li>
+<li><a href="#ch02-building-blocks-of-tcp">Ch02. Building Blocks of TCP</a>
+<ul>
+<li><a href="#three-way-handshake">Three-way handshake</a></li>
+<li><a href="#congestion-avoidance-and-control">Congestion avoidance and control</a>
+<ul>
+<li><a href="#flow-control">Flow control</a></li>
+<li><a href="#slow-start">Slow start</a></li>
+<li><a href="#congestion-avoidance">Congestion avoidance</a></li>
+</ul></li>
+<li><a href="#bandwidth-delay-product">Bandwidth-Delay Product</a></li>
+<li><a href="#head-of-line-blocking">Head-of-Line Blocking</a></li>
+<li><a href="#optimizing-for-tcp">Optimizing for TCP</a></li>
+</ul></li>
+<li><a href="#ch03-building-blocks-of-udp">Ch03. Building Blocks of UDP</a>
+<ul>
+<li><a href="#null-protocol-services">Null Protocol Services</a></li>
+<li><a href="#udp-and-network-address-translators">UDP and Network Address Translators</a></li>
+<li><a href="#optimizing-for-udp">Optimizing for UDP</a></li>
+</ul></li>
+<li><a href="#ch04-transport-layer-security-tls">Ch04. Transport Layer Security (TLS)</a>
+<ul>
+<li><a href="#encryption-authentication-and-integrity">Encryption, Authentication, and Integrity</a></li>
+<li><a href="#tls-handshake">TLS Handshake</a>
+<ul>
+<li><a href="#detailed-steps">Detailed Steps</a></li>
+</ul></li>
+<li><a href="#tls-session-resumption">TLS Session Resumption</a>
+<ul>
+<li><a href="#session-identifiers">Session Identifiers</a></li>
+<li><a href="#session-tickets">Session Tickets</a></li>
+</ul></li>
+<li><a href="#chain-of-trust-and-certificate-authorities">Chain of Trust and Certificate Authorities</a></li>
+</ul></li>
+<li><a href="#ch05-introduction-to-wireless-networks">Ch05. Introduction to Wireless Networks</a>
+<ul>
+<li><a href="#performance-fundamentals">Performance Fundamentals</a>
+<ul>
+<li><a href="#bandwidth">Bandwidth</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch09-brief-history-of-http">Ch09. Brief History of HTTP</a>
+<ul>
+<li><a href="#http-0-9">HTTP 0.9</a></li>
+<li><a href="#http-1-0">HTTP 1.0</a></li>
+<li><a href="#http-1-1">HTTP 1.1</a></li>
+</ul></li>
+<li><a href="#ch10-primer-on-web-performance">Ch10. Primer on Web Performance</a>
+<ul>
+<li><a href="#hypertext-web-pages-and-web-applications">Hypertext, Web pages, and Web Applications</a></li>
+<li><a href="#speed-performance-and-human-perception">Speed, Performance, and Human Perception</a></li>
+<li><a href="#analyzing-the-resource-waterfall">Analyzing the Resource Waterfall</a></li>
+<li><a href="#browser-optimization">Browser Optimization</a></li>
+</ul></li>
+<li><a href="#ch11-http-1-x">Ch11. HTTP 1.X</a>
+<ul>
+<li><a href="#benefits-of-keepalive-connections">Benefits of Keepalive Connections</a></li>
+<li><a href="#http-pipelining">HTTP Pipelining</a></li>
+</ul></li>
+<li><a href="#ch14-primer-on-browser-networking">Ch14. Primer on Browser Networking</a></li>
+<li><a href="#ch15-xmlhttprequest">Ch15. XMLHttpRequest</a></li>
+</ul>
+</nav>
+
+<h1 id="ch01-primer-on-latency-and-bandwidth">Ch01. Primer on Latency and Bandwidth</h1>
+
+<blockquote>
+<p><strong>Latency</strong></p>
+
+<p>The time from the source sending a packet to the destination receiving it</p>
+
+<p><strong>Bandwidth</strong></p>
+
+<p>Maximum throughput of a logical or physical communication path</p>
+</blockquote>
+
+<p><img src="http://brilliun.com/images/high-performance-browser-networking/BandwidthAndLatency.png" alt="Bandwidth and latency" /></p>
+
+<p>Latency, not bandwidth, is the performance bottleneck for most web‐ sites!</p>
+
+<p>To increase bandwidth, while it might not be cheap, we have multiple strategies available, like adding more fiber links.</p>
+
+<p>Improving latency, on the other hand, is a very different story. Since we can’t make light travel faster, we can make the distance shorter. However, laying new cables is also not always possible due to the constraints imposed by the physical terrain, social and political reasons, and of course, the associated costs.</p>
+
+<p>As a result, to improve performance of our applications, we need to architect and optimize our protocols and networking code with explicit awareness of the limitations of available bandwidth and the speed of light: we need to reduce round trips, move the data closer to the client, and build applications that can hide the latency through caching, pre-fetching, and a variety of similar techniques</p>
+
+<h1 id="ch02-building-blocks-of-tcp">Ch02. Building Blocks of TCP</h1>
+
+<p>TCP provides an effective abstraction of a reliable network running over an unreliable channel, hiding most of the complexity of network communication from our applications:</p>
+
+<ul>
+<li>retransmission of lost data</li>
+<li>in-order delivery</li>
+<li>data integrity</li>
+</ul>
+
+<p>and more. When you work with a TCP stream, you are guaranteed that all bytes sent will be identical with bytes received and that they will arrive in the same order to the client.</p>
+
+<h2 id="three-way-handshake">Three-way handshake</h2>
+
+<p><img src="http://brilliun.com/images/high-performance-browser-networking/threewayHandshake.png" alt="Illustration" /></p>
+
+<p>This startup process applies to every TCP connection and carries an important implication for performance of all network applications using TCP: each new connection will have a full roundtrip of latency before any application data can be transferred. Note that bandwidth of the connection plays no role here. Instead, the delay is governed by the latency between the client and the server.</p>
+
+<h2 id="congestion-avoidance-and-control">Congestion avoidance and control</h2>
+
+<p>Once the roundtrip time exceed the maximum retransmission interval for any host, that host will begin to introduce more and more copies of the same datagrams into the net.</p>
+
+<p>Mechanisms to address this issue:</p>
+
+<ul>
+<li>flow control</li>
+<li>congestion control</li>
+<li>congestion avoidance</li>
+</ul>
+
+<h3 id="flow-control">Flow control</h3>
+
+<p>Each side of the TCP connection advertises its own receive window (rwnd), which communicates the size of the available buffer space to hold the incoming data.</p>
+
+<p><img src="http://brilliun.com/images/high-performance-browser-networking/flowControl.png" alt="Illustration" /></p>
+
+<p>Flow control prevented the sender from overwhelming the receiver, but there was no mechanism to prevent either side from overwhelming the underlying network.</p>
+
+<h3 id="slow-start">Slow start</h3>
+
+<p>The only way to estimate the available capacity between the client and the server is to measure it by exchanging data. To start, the server initializes a new congestion window (cwnd) variable per TCP connection and sets its initial value to a conservative, system-specified value.</p>
+
+<p>The cwnd variable is not advertised or exchanged between the sender and receiver—in this case, it will be a private variable maintained by the server.</p>
+
+<p>Further, a new ￼￼￼￼Congestion Avoidance and Control rule is introduced: the maximum amount of data in flight (not ACKed) between the client and the server is the minimum of the rwnd and cwnd variables. We start with a small congestion window and double it for every roundtrip.</p>
+
+<p>The performance of many web applications is often limited by the roundtrip time between server and client: slow-start limits the available bandwidth throughput, which has an adverse effect on the performance of small transfers.</p>
+
+<h3 id="congestion-avoidance">Congestion avoidance</h3>
+
+<p>Slow-start initializes the connection with a conservative window and, for every roundtrip, doubles the amount of data in flight until it exceeds</p>
+
+<ul>
+<li>the receiver’s flow-control window,</li>
+<li>a system-configured congestion threshold (ssthresh) window,</li>
+<li>or until a packet is lost,</li>
+</ul>
+
+<p>at which point the congestion avoidance algorithm takes over.</p>
+
+<p><img src="http://brilliun.com/images/high-performance-browser-networking/avoidance.png" alt="Illustration" /></p>
+
+<p>The implicit assumption in congestion avoidance is that packet loss is indicative of network congestion: somewhere along the path we have encountered a congested link or a router, which was forced to drop the packet, and hence we need to adjust our window to avoid inducing more packet loss to avoid overwhelming the network.</p>
+
+<p>At a certain point, another packet loss event will occur, and the process will repeat once over.</p>
+
+<h2 id="bandwidth-delay-product">Bandwidth-Delay Product</h2>
+
+<p>If either the sender or receiver are frequently forced to stop and wait for ACKs for previous packets, then this would create gaps in the data flow,</p>
+
+<p><img src="http://brilliun.com/images/high-performance-browser-networking/dataGap.png" alt="Data gap" /></p>
+
+<p>which would consequently limit the maximum throughput of the connection. To address this problem, the window sizes should be made just big enough, such that either side can continue sending data until an ACK arrives back from the client for an earlier packet—no gaps,maximum throughput. The optimal window size can be calculated by bandwidth-delay product.</p>
+
+<blockquote>
+<p><strong>Bandwidth-delay product (BDP)</strong></p>
+
+<p>Product of data link’s capacity and its end-to-end delay. The result is the maximum amount of unacknowledged data that can be in flight at any point in time.</p>
+</blockquote>
+
+<h2 id="head-of-line-blocking">Head-of-Line Blocking</h2>
+
+<p>While TCP is a popular choice, it is not the only, nor necessarily the best choice for every occasion. Specifically, some of the features, such as in-order and reliable packet delivery, are not always necessary and can introduce unnecessary delays and negative performance implications.</p>
+
+<p>That is because if one of the packets is lost in route to the receiver, then all subsequent packets must be held in the receiver’s TCP buffer until the lost packet is retransmitted and arrives at the receiver.</p>
+
+<p><img src="http://brilliun.com/images/high-performance-browser-networking/TCP_HOL.png" alt="Head-of-Line" /></p>
+
+<p>This effect is known as TCP head-of-line (HOL) blocking</p>
+
+<p>The delay imposed by head-of-line blocking allows our applications to avoid having to deal with packet reordering and reassembly, which makes our application code much simpler. However, this is done at the cost of introducing unpredictable latency variation in the packet arrival times, commonly referred to as jitter, which can negatively impact the performance of the application.</p>
+
+<h2 id="optimizing-for-tcp">Optimizing for TCP</h2>
+
+<p>TCP is an adaptive protocol designed to be fair to all network peers and to make themost efficient use of the underlying network. Thus, the best way to optimize TCP is to tune how TCP senses the current network conditions and adapts its behavior based on the type and the requirements of the layers below and above it: e.g., wireless networks may need different congestion algorithms.</p>
+
+<p>While the specific details of each algorithm and feedback mechanismwill continue to evolve, the core principles and their implications remain unchanged:</p>
+
+<ul>
+<li>TCP three-way handshake introduces a full roundtrip of latency.</li>
+<li>TCP slow-start is applied to every new connection.</li>
+<li>TCP flow and congestion control regulate throughput of all connections.</li>
+<li>TCP throughput is regulated by current congestion window size.</li>
+</ul>
+
+<p>As a result, the rate with which a TCP connection can transfer data in modern high-speed networks is often limited by the roundtrip time between the receiver and sender.</p>
+
+<h1 id="ch03-building-blocks-of-udp">Ch03. Building Blocks of UDP</h1>
+
+<p>The primary feature and appeal of UDP is not in what it introduces, but rather in all the features it chooses to omit.</p>
+
+<p>The most well-known use of UDP, and one that every browser and Internet application depends on, is the Domain Name System (DNS).</p>
+
+<p>The Web Real-Time Communication (WebRTC) standards are enabling real-time communication, such as voice and video calling and other forms of peer-to-peer (P2P) communication, natively within the browser via UDP.</p>
+
+<h2 id="null-protocol-services">Null Protocol Services</h2>
+
+<p>At its core, UDP simply provides “application multiplexing” on top of IP by embedding the source and the target application ports of the communicating hosts. With that in mind, we can now summarize all the UDP non-services:</p>
+
+<ul>
+<li>No guarantee of message delivery</li>
+<li>No guarantee of order of delivery</li>
+<li>No connection state tracking</li>
+<li>No congestion control</li>
+</ul>
+
+<p>TCP is a byte-stream oriented protocol capable of transmitting application messages spread across multiple packets without any explicit message boundaries within the packets themselves. To achieve this, connection state is allocated on both ends of the connection, and each packet is sequenced, retransmitted when lost, and delivered in order. UDP datagrams, on the other hand, have definitive boundaries: each datagram is carried in a single IP packet, and each application read yields the full message; datagrams cannot be fragmented.</p>
+
+<h2 id="udp-and-network-address-translators">UDP and Network Address Translators</h2>
+
+<p>The proposed IP reuse solution was to introduce NAT devices at the edge of the network, each of which would be responsible for maintaining a table mapping of local IP and port tuples to one or more globally unique (public) IP and port tuples.</p>
+
+<p><img src="http://brilliun.com/images/high-performance-browser-networking/NAT.png" alt="Figure" /></p>
+
+<p>The local IP address space behind the translator could then be reused among many different networks, thus solving the address depletion problem.</p>
+
+<p>Each TCP connection has a well-defined protocol state machine, which begins with a handshake, followed by application data transfer, and a well-defined exchange to close the connection. Given this flow, each middlebox can observe the state of the connection and create and remove the routing entries as needed. With UDP, there is no handshake or connection termination, and hence there is no connection state machine to monitor.</p>
+
+<h2 id="optimizing-for-udp">Optimizing for UDP</h2>
+
+<p>Unlike TCP, which ships with built-in flow and congestion control and congestion avoidance, UDP applications must implement these mechanisms on their own. Congestion insensitive UDP applications can easily overwhelm the network, which can lead to degraded network performance and, in severe cases, to network congestion/collapse.</p>
+
+<h1 id="ch04-transport-layer-security-tls">Ch04. Transport Layer Security (TLS)</h1>
+
+<p>When the SSL (Secure Sockets Layer) protocol was standardized by the IETF, it was renamed to Transport Layer Security (TLS). So basically they are just different versions of the protocol.</p>
+
+<p>TLS protocol is between the application layer and above the transport layer.</p>
+
+<p><img src="http://brilliun.com/images/high-performance-browser-networking/TLS.png" alt="TLS" /></p>
+
+<h2 id="encryption-authentication-and-integrity">Encryption, Authentication, and Integrity</h2>
+
+<p>The TLS protocol is designed to provide three essential services to all applications running above it:</p>
+
+<ul>
+<li>encryption</li>
+<li>authentication</li>
+<li>data integrity</li>
+</ul>
+
+<p>In order to establish a cryptographically secure data channel, TLS protocol specifies a well-defined handshake sequence, which uses asymmetric key cryptography.</p>
+
+<p>As part of the TLS handshake, the protocol also allows both connection peers to authenticate their identity. It allows the client to verify that the server is who it claims to be (e.g., your bank) and not someone simply pretending to be the destination by spoofing its name or IP address. This verification is based on the established chain of trust.</p>
+
+<p>TLS protocol also provides its own message framing mechanism and signs each message with a message authentication code (MAC). The MAC algorithm is a one-way cryptographic hash function (effectively a checksum) to ensure message integrity and authenticity.</p>
+
+<h2 id="tls-handshake">TLS Handshake</h2>
+
+<p>Before the client and the server can begin exchanging application data over TLS, the encrypted tunnel must be negotiated: the client and the server must agree on the version of the TLS protocol, choose the ciphersuite, and verify certificates if necessary. Unfortunately, each of these steps requires new packet roundtrips between the client and the server, which adds startup latency to all TLS connections.</p>
+
+<h3 id="detailed-steps">Detailed Steps</h3>
+
+<ol>
+<li>TLS runs on TCP, so a TCP 3-way handshake is first completed.</li>
+<li>(PlainText) Client sends some specs, such as TLS version, supported ciphersuites.</li>
+<li>Server decides the specs to use. Server sends its certificate to client.</li>
+<li>Client verifies certificate. Client generates a new symmetric key, encrypts it with server&rsquo;s public key, and then sends it to server.</li>
+<li>Server decrypts the symmetric key, checks integrity with MAC, and send a &ldquo;Finished&rdquo; message encrypted to client.</li>
+<li>Client decrypts the message, verifies the MAC.</li>
+<li>If all is well, the secure tunnel is established.</li>
+</ol>
+
+<h2 id="tls-session-resumption">TLS Session Resumption</h2>
+
+<p>To help mitigate some of the extra latency and computational cost, TLS provides an ability to resume or share the same negotiated secret key data between multiple connections.</p>
+
+<h3 id="session-identifiers">Session Identifiers</h3>
+
+<p>Session Identifiers resumption mechanism allowed the server to create and send a 32-byte session identifier as part of its “ServerHello” message during the full TLS negotiation</p>
+
+<p>Internally, the server could then maintain a cache of session IDs and the negotiated session parameters for each peer. In turn, the client could then also store the session ID information and include the ID in the “ClientHello” message for a subsequent session, which serves as an indication to the server that the client still remembers the negotiated cipher suite and keys from previous handshake and is able to reuse them.</p>
+
+<p>However, one of the practical limitations of the Session Identifiers mechanism is the requirement for the server to create and maintain a session cache for every client.</p>
+
+<h3 id="session-tickets">Session Tickets</h3>
+
+<p>Session Ticket replacement mechanism removes the requirement for the server to keep per-client session state. Instead, in the last exchange of the full TLS handshake, the server can include a New Session Ticket record, which includes all of the session data encrypted with a secret key known only by the server. This session ticket is then stored by the client .</p>
+
+<h2 id="chain-of-trust-and-certificate-authorities">Chain of Trust and Certificate Authorities</h2>
+
+<p><img src="http://brilliun.com/images/high-performance-browser-networking/CertificateChain.png" alt="CertificateChain" /></p>
+
+<h1 id="ch05-introduction-to-wireless-networks">Ch05. Introduction to Wireless Networks</h1>
+
+<h2 id="performance-fundamentals">Performance Fundamentals</h2>
+
+<h3 id="bandwidth">Bandwidth</h3>
+
+<p>The overall channel bitrate is directly proportional to the assigned range. Hence, all else being equal, a doubling in available frequency range will double the data rate— e.g., going from 20 to 40 MHz of bandwidth can double the channel data rate, which is exactly how 802.11n is improving its performance over earlier WiFi standards.</p>
+
+<p>It is also worth noting that not all frequency ranges offer the same performance. Low-frequency signals travel farther and cover large areas (macrocells), but at the cost of requiring larger antennas and having more clients competing for access. On the other hand, high-frequency signals can transfer more data but won’t travel as far, resulting in smaller coverage areas (microcells) and a requirement for more infrastructure.</p>
+
+<h1 id="ch09-brief-history-of-http">Ch09. Brief History of HTTP</h1>
+
+<h2 id="http-0-9">HTTP 0.9</h2>
+
+<pre><code> $&gt; telnet google.com 80
+
+    Connected to 74.125.xxx.xxx
+
+    GET /about/
+
+    (hypertext response)
+    (connection closed)
+</code></pre>
+
+<ul>
+<li>ASCII only</li>
+<li>Response is a single HTML document</li>
+<li>Connection closes after document transfer</li>
+</ul>
+
+<h2 id="http-1-0">HTTP 1.0</h2>
+
+<pre><code>$&gt; telnet website.org 80
+
+    Connected to xxx.xxx.xxx.xxx
+
+    GET /rfc/rfc1945.txt HTTP/1.0
+    User-Agent: CERN-LineMode/2.15 libwww/2.17b3
+    Accept: */*
+
+    HTTP/1.0 200 OK
+    Content-Type: text/plain
+    Content-Length: 137582
+    Expires: Thu, 01 Dec 1997 16:00:00 GMT
+    Last-Modified: Wed, 1 May 1996 12:45:26 GMT
+    Server: Apache 0.84
+
+    (plain-text response)
+    (connection closed)
+</code></pre>
+
+<ul>
+<li>Request may consist of multiple newline separated header fields.</li>
+<li>Response object is prefixed with a response status line.</li>
+<li>Response object has its own set of newline separated header fields.</li>
+<li>Response object is not limited to hypertext (html, plain text, image, etc.)</li>
+<li>The connection between server and client is closed after every request.</li>
+</ul>
+
+<h2 id="http-1-1">HTTP 1.1</h2>
+
+<p>HTTP 1.1 introduced a number of critical performance optimizations: keep-alive connections, chunked encoding transfers, byte-range requests, additional caching mechanisms, transfer encodings, and request pipelining.</p>
+
+<pre><code>$&gt; telnet website.org 80
+    Connected to xxx.xxx.xxx.xxx
+
+    GET /index.html HTTP/1.1
+    Host: website.org
+    User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4)... (snip)
+    Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+    Accept-Encoding: gzip,deflate,sdch
+    Accept-Language: en-US,en;q=0.8
+    Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
+    Cookie: __qca=P0-800083390... (snip)
+    
+    HTTP/1.1 200 OK
+    Server: nginx/1.0.11
+    Connection: keep-alive
+    Content-Type: text/html; charset=utf-8
+    Via: HTTP/1.1 GWA
+    Date: Wed, 25 Jul 2012 20:23:35 GMT
+    Expires: Wed, 25 Jul 2012 20:23:35 GMT
+    Cache-Control: max-age=0, no-cache
+    Transfer-Encoding: chunked
+
+    100
+    &lt;!doctype html&gt;
+    (snip)
+    
+    100
+    (snip)
+
+    0
+
+    GET /favicon.ico HTTP/1.1
+    Host: www.website.org
+    User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4)... (snip)
+    Accept: */*
+    Referer: http://website.org/
+    Connection: close
+    Accept-Encoding: gzip,deflate,sdch
+    Accept-Language: en-US,en;q=0.8
+    Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
+    Cookie: __qca=P0-800083390... (snip)
+    
+    HTTP/1.1 200 OK
+    Server: nginx/1.0.11
+    Content-Type: image/x-icon
+    Content-Length: 3638
+    Connection: close
+    Last-Modified: Thu, 19 Jul 2012 17:51:44 GMT
+    Cache-Control: max-age=315360000
+    Accept-Ranges: bytes
+    Via: HTTP/1.1 GWA
+    Date: Sat, 21 Jul 2012 21:35:22 GMT
+    Expires: Thu, 31 Dec 2037 23:55:55 GMT
+    Etag: W/PSA-GAu26oXbDi
+    
+    (icon data)
+    (connection closed)
+</code></pre>
+
+<p>We have two object requests, one for an HTML page and one for an image, both delivered over a single connection. This is connection keep-alive.</p>
+
+<p>Additionally, the HTTP 1.1 protocol added content, encoding, character set, and even language negotiation, transfer encoding, caching directives, client cookies, plus a dozen other capabilities that can be negotiated on each request.</p>
+
+<h1 id="ch10-primer-on-web-performance">Ch10. Primer on Web Performance</h1>
+
+<h2 id="hypertext-web-pages-and-web-applications">Hypertext, Web pages, and Web Applications</h2>
+
+<p>In HTTP 0.9 era (hypertext only), where only a single HTML document is transferred, tuning for performance was as simple as optimizing for a single HTTP request over a short-lived TCP connection.</p>
+
+<p>In web page era, where multiple TCP connections are now potentially at play, and the key performance metric has shifted from document load time to <strong>page load time</strong>.</p>
+
+<blockquote>
+<p>Page load time is time to <strong>onload</strong> event in the browser, which is an event fired by the browser once the document and all of its dependent resources (JavaScript, images, etc.) have finished loading.</p>
+</blockquote>
+
+<p>Finally, in web application era, although page load time is still important, we are now interested in answering application-specific questions, which are tightly related to user interactions.</p>
+
+<h2 id="speed-performance-and-human-perception">Speed, Performance, and Human Perception</h2>
+
+<p><img src="http://brilliun.com/images/high-performance-browser-networking/TimeAndUserPerception.png" alt="TimeAndUserPerception" /></p>
+
+<p>For an application to feel instant, a perceptible response to user input must be provided within hundreds of milliseconds. After a second or more, the user’s flow and engagement with the initiated task is broken, and after 10 seconds have passed, unless progress feedback is provided, the task is frequently abandoned.</p>
+
+<p>Now, add up the network latency of a DNS lookup, followed by a TCP handshake, and another few roundtrips for a typical web page request, and much, if not all, of our 100– 1,000 millisecond latency budget can be easily spent on just the networking overhead</p>
+
+<h2 id="analyzing-the-resource-waterfall">Analyzing the Resource Waterfall</h2>
+
+<ol>
+<li><p>While the content of the web document is being fetched, new HTTP requests are being dispatched: HTML parsing is performed incrementally, allowing the browser to discover required resources early and dispatch the necessary requests in parallel. Hence, the scheduling of when the resource is fetched is in large part determined by the structure of the markup.</p></li>
+
+<li><p>The rendering process starts well before all the resources are fully loaded, allowing the user to begin interacting with the page while the page is being built.</p></li>
+</ol>
+
+<p>Optimizing the resource waterfall (by rearranging resources in HTML structure or so on) is also referred as <em>front-end performance optimization</em>. However, in reality, the server response times and network latency (“back-end performance”) are no less critical for optimizing the resource waterfall.</p>
+
+<p>Usually download time is only a small fraction of the total latency of each connection. There are a lot of network latency while waiting to receive the first byte of each response.</p>
+
+<p>Bandwidth is not the limiting performance factor for most web applications. Instead, the bottleneck is the network roundtrip latency between the client and the server.</p>
+
+<h2 id="browser-optimization">Browser Optimization</h2>
+
+<ul>
+<li>Critical resources such as CSS and JavaScript should be discoverable as early as possible in the document.</li>
+<li>CSS should be delivered as early as possible to unblock rendering and JavaScript execution.</li>
+<li>Noncritical JavaScript should be deferred to avoid blocking DOM and CSSOM construction.</li>
+<li>The HTML document is parsed incrementally by the parser; hence the document should be periodically flushed for best performance.</li>
+</ul>
+
+<h1 id="ch11-http-1-x">Ch11. HTTP 1.X</h1>
+
+<p>HTTP 1.1 introduced a large number of critical performance enhancements and features, such as:</p>
+
+<ul>
+<li>Persistent connections to allow connection reuse</li>
+<li>Chunked transfer encoding to allow response streaming</li>
+<li>Request pipelining to allow parallel request processing</li>
+<li>Byte serving to allow range-based resource requests</li>
+<li>Improved and much better-specified caching mechanisms</li>
+</ul>
+
+<h2 id="benefits-of-keepalive-connections">Benefits of Keepalive Connections</h2>
+
+<p>Reuse HTTP connection to save roundtrip latency.</p>
+
+<h2 id="http-pipelining">HTTP Pipelining</h2>
+
+<ul>
+<li>Without HTTP pipelining:
+
+<ul>
+<li>dispatch request, wait for the full response, dispatch next request from the client queue.</li>
+</ul></li>
+<li>With HTTP pipelining:
+
+<ul>
+<li>the FIFO queue is relocated from the client (request queuing) to the server (response queuing).</li>
+</ul></li>
+</ul>
+
+<h1 id="ch14-primer-on-browser-networking">Ch14. Primer on Browser Networking</h1>
+
+<p>In modern browser, there are self-managed socket pools used for connection management. Sockets are grouped by origin, and each pool enforces its own connection limits and security constraints.</p>
+
+<p><img src="http://brilliun.com/images/high-performance-browser-networking/SocketPools.png" alt="SocketPools" /></p>
+
+<p>Such architecture offers several performance benefits:</p>
+
+<ul>
+<li>The browser can service queued requests in priority order.</li>
+<li>The browser can reuse sockets to minimize latency and improve throughput.</li>
+<li>The browser can be proactive in opening sockets in anticipation of request.</li>
+<li>The browser can optimize when idle sockets are closed.</li>
+<li>The browser can optimize bandwidth allocation across all sockets.</li>
+</ul>
+
+<h1 id="ch15-xmlhttprequest">Ch15. XMLHttpRequest</h1>
+
+<p>XMLHttpRequest (XHR) is a browser-level API that enables the client to script data transfers via JavaScript.</p>
+
+<p>The power of XHR is not only that it enabled asynchronous communication within the browser, but also that it made it simple. Since XHR is an application API provided by the browser, the browser automatically takes care of all the low- level connection management, protocol negotiation, formatting of HTTP requests, and much more:</p>
+
+<ul>
+<li>The browser manages connection establishment, pooling, and termination.</li>
+<li>The browser determines the best HTTP(S) transport (HTTP 1.0, 1.1, 2.0).</li>
+<li>The browser handles HTTP caching, redirects, and content-type negotiation.</li>
+<li>The browser enforces security, authentication, and privacy constraints.</li>
+<li>And more&hellip;</li>
+</ul>
+
+<p>However, XHR also has its limitations. As we saw, streaming has never been an official use case in the XHR standard, and the support is limited.</p>
+
+<p>Similarly, there is no one best strategy for delivering real-time updates with XHR. Periodic polling incurs high overhead and message latency delays. Long-polling delivers low latency but still has the same per-message overhead; each message is its own HTTP request.</p>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="http://brilliun.com/2017/01/tips-for-coding-interviews/" data-tooltip="Tips for Coding Interviews">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="http://brilliun.com/2015/12/webgl-part4/" data-tooltip="Webgl Part4">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://brilliun.com/2016/12/high-performance-browser-networking/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://brilliun.com/2016/12/high-performance-browser-networking/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Guangyao Liu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="http://brilliun.com/2017/01/tips-for-coding-interviews/" data-tooltip="Tips for Coding Interviews">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="http://brilliun.com/2015/12/webgl-part4/" data-tooltip="Webgl Part4">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://brilliun.com/2016/12/high-performance-browser-networking/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://brilliun.com/2016/12/high-performance-browser-networking/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fbrilliun.com%2F2016%2F12%2Fhigh-performance-browser-networking%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http%3A%2F%2Fbrilliun.com%2F2016%2F12%2Fhigh-performance-browser-networking%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="http://brilliun.com/images/myprofile.jpg" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Guangyao Liu</h4>
+    
+      <div id="about-card-bio">A father of two girls.</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Software Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Tokyo, Japan
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2018/06/implementation-of-api-pagination/">
+                <h3 class="media-heading">Implementation of Api Pagination</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Overview Stable pagination is not a silver bullet. Consider sites like Reddit and Hacker News. Their pagination is inherently unstable: items are sorted by a volatile ranking, frequently moving up and down the list over time. How do they deal with it? They don&rsquo;t.
+Both sites frequently showcases how bad it can look by showing duplicate items as you advance pages. It&rsquo;s not all that bad, because neither site subscribes to the infinite scrolling crowd (yet?</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2018/05/designing-data-intensive-applications-part1/">
+                <h3 class="media-heading">Designing Data Intensive Applications Part1</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">CH01. Reliable, Scalable, and Maintainable Applications About Data System We can think of any kind of databases, queues, or caches as a data system. Nowadays, these tools are optimized for a variety of different uses, and they no longer neatly fit into their origin categories
+For example, there are data stores that are also used as message queues (Redis), and there are message queues with database-like durability guarantees (Apache Kafka).</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2018/04/the-innodb-storage-engine/">
+                <h3 class="media-heading">The Innodb Storage Engine</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Starting from MySQL 5.5.5, the default storage engine for new tables is InnoDB rather than MyISAM.
+Multi-Version Concurrency Control (MVCC) This technique lets InnoDB transactions with certain isolation levels perform consistent read operations; that is, to query rows that are being updated by other transactions, and see the values from before those updates occurred. This is a powerful technique to increase concurrency, by allowing queries to proceed without waiting due to locks held by the other transactions.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/06/git-cleanup-local-branches-merged/">
+                <h3 class="media-heading">Git Cleanup Local Branches Merged</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">TL;DR $ git branch --merged develop | egrep -v &quot;(^\*|master|dev)&quot; | xargs -n 1 git branch -d  BTW git branch --no-merged  can be used to check the branches to keep.
+Breakdown 1. Find branches merged # list up branches merged into 'develop' git branch --merged develop  OR
+# list up branches merged into current branch git branch --merged  2. Exclude critical branches # Exclude branches with prefix of &quot;*&quot;(current), &quot;master&quot;, or &quot;dev&quot; egrep -v &quot;(^\*|master|dev)&quot;  **egrep is equivalent to grep -E</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/05/python-notes/">
+                <h3 class="media-heading">Python Notes</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">1. Numeric Values &gt;&gt;&gt; 17 // 3 # floor division 5 &gt;&gt;&gt; 17 % 3 # remainder 2 &gt;&gt;&gt; 2 ** 7 # 2 to the power of 7 128  2. Strings  Unlike other languages, special characters such as \n have the same meaning with both single ('...') and double (&quot;...&quot;) quotes. The only difference between the two is that within single quotes you don’t need to escape &quot; (but you have to escape \') and vice versa.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/02/ssl-vs-ssh/">
+                <h3 class="media-heading">Ssl vs Ssh</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Concepts  SSL: Secure Sockets Layer
+TLS: Transport Layer Security (TLS is the name of the IETF protocol standard that grew out of SSL 3.0)
+HTTPS: HyperText Transfer Protocol over SSL/TLS
+SSH: Secure Shell
+ HTTPS is the secure replacement for HTTP, while SSH is the secure replacement for Telnet.
+Similarity  Both SSH and SSL use symmetric cryptography to preserve the confidentiality of transmitted data. They both use asymmetric cryptography a.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/02/algorithms-and-data-structures/">
+                <h3 class="media-heading">Algorithms and Data Structures</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Time Complexity Usually only the worst-case running time is considered because:
+ it gives an upper bound For many situations, the worst case occurs fairly often. (Eg. searching for items which may frequently be absent) The average case is often as bad as worst case (:TO-CHECK:)  To easily describe the performance of an algorithm, we usually use order of growth, e.g., O(n^2).
+Sorting Algorithms Comparison of sorting algorithms</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/01/how-browsers-work/">
+                <h3 class="media-heading">How Browsers Work</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Prior Knowledge There are 3 main tasks for a browser to execute a web application:
+ Fetching resources Page layout and rendering Javascript execution  Browsers And Browser Kernels Comparison of web browser engines
+(WebKit)  Web layout engine: WebCore Javascript engine: JavascriptCore  Chrome  Web layout engine: Blink  Originally forked from WebCore, a component of WebKit  Javascript engine: V8  Safari  Web layout engine: WebCore Javascript engine: JavascriptCore  later evolved to Nitro, which compiles JavaScript into native machine code   Firefox  Web layout engine: Gecko Javascript engine: SpiderMonkey  Microsoft Edge  Web layout engine: EdgeHTML  forked from Trident, the engine of IE  Javascript engine: Chakra  Fetching Resources Prior Knowledge URL And URI Socket IP Protocol MAC Address Fetching from Cache Given the URL of a resource on the web, the browser starts by checking its local and application caches.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/01/tips-for-coding-interviews/">
+                <h3 class="media-heading">Tips for Coding Interviews</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Primer  When target is string, confirm whether it&rsquo;s ASCII, which at most has 256 possible characters. So use space to boost time performance.
+ whenever only flags or booleans in an array, use bit vector instead for better space complexity.
+ For linked list problems, usually a pair of slow pointer and fast pointer would be a nice try.gb
+  Tree Depth/Height  To get the height (from leaf) of each node in a binary tree, use following recursive code:  function getHeight(TreeNode curr) { if (curr == null) return 0; return Math.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2016/12/high-performance-browser-networking/">
+                <h3 class="media-heading">High Performance Browser Networking</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2016
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Ch01. Primer on Latency and Bandwidth  Latency
+The time from the source sending a packet to the destination receiving it
+Bandwidth
+Maximum throughput of a logical or physical communication path
+ Latency, not bandwidth, is the performance bottleneck for most web‐ sites!
+To increase bandwidth, while it might not be cheap, we have multiple strategies available, like adding more fiber links.
+Improving latency, on the other hand, is a very different story.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         14 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('http://brilliun.com/images/mycover.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="http://brilliun.com/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'http:\/\/brilliun.com\/2016\/12\/high-performance-browser-networking\/';
+          
+            this.page.identifier = '\/2016\/12\/high-performance-browser-networking\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'brilliun';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

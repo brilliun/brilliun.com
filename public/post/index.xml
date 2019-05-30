@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Brilliun&#39;s Blog</title>
+    <link>http://brilliun.com/post/</link>
+    <description>Recent content in Posts on Brilliun&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 14 Jun 2018 22:20:53 +0900</lastBuildDate>
+    
+	<atom:link href="http://brilliun.com/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Implementation of Api Pagination</title>
+      <link>http://brilliun.com/2018/06/implementation-of-api-pagination/</link>
+      <pubDate>Thu, 14 Jun 2018 22:20:53 +0900</pubDate>
+      
+      <guid>http://brilliun.com/2018/06/implementation-of-api-pagination/</guid>
+      <description>Overview Stable pagination is not a silver bullet. Consider sites like Reddit and Hacker News. Their pagination is inherently unstable: items are sorted by a volatile ranking, frequently moving up and down the list over time. How do they deal with it? They don&amp;rsquo;t.
+Both sites frequently showcases how bad it can look by showing duplicate items as you advance pages. It&amp;rsquo;s not all that bad, because neither site subscribes to the infinite scrolling crowd (yet?</description>
+    </item>
+    
+    <item>
+      <title>Designing Data Intensive Applications Part1</title>
+      <link>http://brilliun.com/2018/05/designing-data-intensive-applications-part1/</link>
+      <pubDate>Mon, 14 May 2018 22:22:54 +0900</pubDate>
+      
+      <guid>http://brilliun.com/2018/05/designing-data-intensive-applications-part1/</guid>
+      <description>CH01. Reliable, Scalable, and Maintainable Applications About Data System We can think of any kind of databases, queues, or caches as a data system. Nowadays, these tools are optimized for a variety of different uses, and they no longer neatly fit into their origin categories
+For example, there are data stores that are also used as message queues (Redis), and there are message queues with database-like durability guarantees (Apache Kafka).</description>
+    </item>
+    
+    <item>
+      <title>The Innodb Storage Engine</title>
+      <link>http://brilliun.com/2018/04/the-innodb-storage-engine/</link>
+      <pubDate>Sat, 14 Apr 2018 22:23:45 +0900</pubDate>
+      
+      <guid>http://brilliun.com/2018/04/the-innodb-storage-engine/</guid>
+      <description>Starting from MySQL 5.5.5, the default storage engine for new tables is InnoDB rather than MyISAM.
+Multi-Version Concurrency Control (MVCC) This technique lets InnoDB transactions with certain isolation levels perform consistent read operations; that is, to query rows that are being updated by other transactions, and see the values from before those updates occurred. This is a powerful technique to increase concurrency, by allowing queries to proceed without waiting due to locks held by the other transactions.</description>
+    </item>
+    
+    <item>
+      <title>Git Cleanup Local Branches Merged</title>
+      <link>http://brilliun.com/2017/06/git-cleanup-local-branches-merged/</link>
+      <pubDate>Thu, 15 Jun 2017 10:42:21 +0900</pubDate>
+      
+      <guid>http://brilliun.com/2017/06/git-cleanup-local-branches-merged/</guid>
+      <description>TL;DR $ git branch --merged develop | egrep -v &amp;quot;(^\*|master|dev)&amp;quot; | xargs -n 1 git branch -d  BTW git branch --no-merged  can be used to check the branches to keep.
+Breakdown 1. Find branches merged # list up branches merged into &#39;develop&#39; git branch --merged develop  OR
+# list up branches merged into current branch git branch --merged  2. Exclude critical branches # Exclude branches with prefix of &amp;quot;*&amp;quot;(current), &amp;quot;master&amp;quot;, or &amp;quot;dev&amp;quot; egrep -v &amp;quot;(^\*|master|dev)&amp;quot;  **egrep is equivalent to grep -E</description>
+    </item>
+    
+    <item>
+      <title>Python Notes</title>
+      <link>http://brilliun.com/2017/05/python-notes/</link>
+      <pubDate>Tue, 16 May 2017 22:32:05 +0900</pubDate>
+      
+      <guid>http://brilliun.com/2017/05/python-notes/</guid>
+      <description>1. Numeric Values &amp;gt;&amp;gt;&amp;gt; 17 // 3 # floor division 5 &amp;gt;&amp;gt;&amp;gt; 17 % 3 # remainder 2 &amp;gt;&amp;gt;&amp;gt; 2 ** 7 # 2 to the power of 7 128  2. Strings  Unlike other languages, special characters such as \n have the same meaning with both single (&#39;...&#39;) and double (&amp;quot;...&amp;quot;) quotes. The only difference between the two is that within single quotes you don’t need to escape &amp;quot; (but you have to escape \&#39;) and vice versa.</description>
+    </item>
+    
+    <item>
+      <title>Ssl vs Ssh</title>
+      <link>http://brilliun.com/2017/02/ssl-vs-ssh/</link>
+      <pubDate>Sun, 19 Feb 2017 22:33:18 +0900</pubDate>
+      
+      <guid>http://brilliun.com/2017/02/ssl-vs-ssh/</guid>
+      <description>Concepts  SSL: Secure Sockets Layer
+TLS: Transport Layer Security (TLS is the name of the IETF protocol standard that grew out of SSL 3.0)
+HTTPS: HyperText Transfer Protocol over SSL/TLS
+SSH: Secure Shell
+ HTTPS is the secure replacement for HTTP, while SSH is the secure replacement for Telnet.
+Similarity  Both SSH and SSL use symmetric cryptography to preserve the confidentiality of transmitted data. They both use asymmetric cryptography a.</description>
+    </item>
+    
+    <item>
+      <title>Algorithms and Data Structures</title>
+      <link>http://brilliun.com/2017/02/algorithms-and-data-structures/</link>
+      <pubDate>Tue, 14 Feb 2017 22:34:46 +0900</pubDate>
+      
+      <guid>http://brilliun.com/2017/02/algorithms-and-data-structures/</guid>
+      <description>Time Complexity Usually only the worst-case running time is considered because:
+ it gives an upper bound For many situations, the worst case occurs fairly often. (Eg. searching for items which may frequently be absent) The average case is often as bad as worst case (:TO-CHECK:)  To easily describe the performance of an algorithm, we usually use order of growth, e.g., O(n^2).
+Sorting Algorithms Comparison of sorting algorithms</description>
+    </item>
+    
+    <item>
+      <title>How Browsers Work</title>
+      <link>http://brilliun.com/2017/01/how-browsers-work/</link>
+      <pubDate>Sat, 14 Jan 2017 22:36:48 +0900</pubDate>
+      
+      <guid>http://brilliun.com/2017/01/how-browsers-work/</guid>
+      <description>Prior Knowledge There are 3 main tasks for a browser to execute a web application:
+ Fetching resources Page layout and rendering Javascript execution  Browsers And Browser Kernels Comparison of web browser engines
+(WebKit)  Web layout engine: WebCore Javascript engine: JavascriptCore  Chrome  Web layout engine: Blink  Originally forked from WebCore, a component of WebKit  Javascript engine: V8  Safari  Web layout engine: WebCore Javascript engine: JavascriptCore  later evolved to Nitro, which compiles JavaScript into native machine code   Firefox  Web layout engine: Gecko Javascript engine: SpiderMonkey  Microsoft Edge  Web layout engine: EdgeHTML  forked from Trident, the engine of IE  Javascript engine: Chakra  Fetching Resources Prior Knowledge URL And URI Socket IP Protocol MAC Address Fetching from Cache Given the URL of a resource on the web, the browser starts by checking its local and application caches.</description>
+    </item>
+    
+    <item>
+      <title>Tips for Coding Interviews</title>
+      <link>http://brilliun.com/2017/01/tips-for-coding-interviews/</link>
+      <pubDate>Sat, 14 Jan 2017 22:35:47 +0900</pubDate>
+      
+      <guid>http://brilliun.com/2017/01/tips-for-coding-interviews/</guid>
+      <description>Primer  When target is string, confirm whether it&amp;rsquo;s ASCII, which at most has 256 possible characters. So use space to boost time performance.
+ whenever only flags or booleans in an array, use bit vector instead for better space complexity.
+ For linked list problems, usually a pair of slow pointer and fast pointer would be a nice try.gb
+  Tree Depth/Height  To get the height (from leaf) of each node in a binary tree, use following recursive code:  function getHeight(TreeNode curr) { if (curr == null) return 0; return Math.</description>
+    </item>
+    
+    <item>
+      <title>High Performance Browser Networking</title>
+      <link>http://brilliun.com/2016/12/high-performance-browser-networking/</link>
+      <pubDate>Wed, 14 Dec 2016 22:38:02 +0900</pubDate>
+      
+      <guid>http://brilliun.com/2016/12/high-performance-browser-networking/</guid>
+      <description>Ch01. Primer on Latency and Bandwidth  Latency
+The time from the source sending a packet to the destination receiving it
+Bandwidth
+Maximum throughput of a logical or physical communication path
+ Latency, not bandwidth, is the performance bottleneck for most web‐ sites!
+To increase bandwidth, while it might not be cheap, we have multiple strategies available, like adding more fiber links.
+Improving latency, on the other hand, is a very different story.</description>
+    </item>
+    
+    <item>
+      <title>Webgl Part4</title>
+      <link>http://brilliun.com/2015/12/webgl-part4/</link>
+      <pubDate>Sun, 06 Dec 2015 22:39:17 +0900</pubDate>
+      
+      <guid>http://brilliun.com/2015/12/webgl-part4/</guid>
+      <description>作为这个系列的最后一篇，我想谈一下自己对于WebGL这项技术的本质的理解。
+这里想要顺带提一下的是“Extensible Web”这个理念或者说运动。它的核心主要是下面两条准则：
+ Web标准应该越来越多地将各种相关的底层功能对Javascript开放 现有的高层特性应该尽可能地转化为可以由Javascript访问或者说控制  读上去比较抽象，通俗一点的解释就是不要再把Javascript程序当作幼儿一般“照料”和“限制”，稍微“危险”一点的事情要么禁止要么由监护人（浏览器）代劳。Javascript以及由其驱动的Web应用正在茁壮成长，以往只赋予native app的那些权限和能力今后应该尽可能多地对Javascript开放。值得欣慰的是，近年来web技术已经在这方面取得了长足的发展，看看 What Web Can Do Today 就能发现大部分以往专属于native app的功能如今在web应用中也能实现了。</description>
+    </item>
+    
+    <item>
+      <title>Webgl Part3</title>
+      <link>http://brilliun.com/2015/10/webgl-part3/</link>
+      <pubDate>Mon, 05 Oct 2015 22:40:37 +0900</pubDate>
+      
+      <guid>http://brilliun.com/2015/10/webgl-part3/</guid>
+      <description>&lt;p&gt;WebGL === 性能提升 ?&lt;/p&gt;
+
+&lt;p&gt;提到WebGL大家最先想到的除了3D应用的渲染之外，另一个主要的共识就是使用WebGL会给图像性能带来颇大的提升，但是这个逻辑是怎么来的呢？而实际应用中是否真的只要切换成WebGL就能自然而然的立马得到想要的性能提升呢？&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Webgl Part2</title>
+      <link>http://brilliun.com/2015/10/webgl-part2/</link>
+      <pubDate>Sat, 03 Oct 2015 22:41:51 +0900</pubDate>
+      
+      <guid>http://brilliun.com/2015/10/webgl-part2/</guid>
+      <description>&lt;p&gt;WebGL === 3D ?&lt;/p&gt;
+
+&lt;p&gt;这是最常见的一个误解。MDN上的&lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Tutorial/Getting_started_with_WebGL&#34;&gt;WebGL入门教程&lt;/a&gt;开篇第一句话就是：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;WebGL enables web content to use an API based on OpenGL ES 2.0 to perform 3D rendering in an HTML canvas in browsers that support it without the use of plug-ins.&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>Webgl Part1</title>
+      <link>http://brilliun.com/2015/10/webgl-part1/</link>
+      <pubDate>Fri, 02 Oct 2015 22:42:48 +0900</pubDate>
+      
+      <guid>http://brilliun.com/2015/10/webgl-part1/</guid>
+      <description>&lt;p&gt;谈一谈WebGL这个看上去很时髦但始终没有进入主流应用的技术。&lt;/p&gt;
+
+&lt;h3 id=&#34;为什么现在是时候考虑应用webgl了&#34;&gt;为什么现在是时候考虑应用WebGL了&lt;/h3&gt;
+
+&lt;p&gt;在WebGL的普及上最大的一个问题是开发者对浏览器支持的担忧。需要特别说明的是如果仍然需要用户手动的从某个菜单中选择“启用WebGL”那就不能算真正的“支持”。毕竟没有人有信心多少用户会愿意做这个举动并且成功找到这个菜单而不是直接认为这个网页很可疑从而离脱。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

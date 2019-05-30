@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.53 with theme Tranquilpeak 0.4.3-SNAPSHOT">
+<meta name="author" content="Guangyao Liu">
+<meta name="keywords" content="">
+<meta name="description" content="1. Numeric Values &gt;&gt;&gt; 17 // 3 # floor division 5 &gt;&gt;&gt; 17 % 3 # remainder 2 &gt;&gt;&gt; 2 ** 7 # 2 to the power of 7 128  2. Strings  Unlike other languages, special characters such as \n have the same meaning with both single (&#39;...&#39;) and double (&quot;...&quot;) quotes. The only difference between the two is that within single quotes you don’t need to escape &quot; (but you have to escape \&#39;) and vice versa.">
+
+
+<meta property="og:description" content="1. Numeric Values &gt;&gt;&gt; 17 // 3 # floor division 5 &gt;&gt;&gt; 17 % 3 # remainder 2 &gt;&gt;&gt; 2 ** 7 # 2 to the power of 7 128  2. Strings  Unlike other languages, special characters such as \n have the same meaning with both single (&#39;...&#39;) and double (&quot;...&quot;) quotes. The only difference between the two is that within single quotes you don’t need to escape &quot; (but you have to escape \&#39;) and vice versa.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python Notes">
+<meta name="twitter:title" content="Python Notes">
+<meta property="og:url" content="http://brilliun.com/2017/05/python-notes/">
+<meta property="twitter:url" content="http://brilliun.com/2017/05/python-notes/">
+<meta property="og:site_name" content="Brilliun&#39;s Blog">
+<meta property="og:description" content="1. Numeric Values &gt;&gt;&gt; 17 // 3 # floor division 5 &gt;&gt;&gt; 17 % 3 # remainder 2 &gt;&gt;&gt; 2 ** 7 # 2 to the power of 7 128  2. Strings  Unlike other languages, special characters such as \n have the same meaning with both single (&#39;...&#39;) and double (&quot;...&quot;) quotes. The only difference between the two is that within single quotes you don’t need to escape &quot; (but you have to escape \&#39;) and vice versa.">
+<meta name="twitter:description" content="1. Numeric Values &gt;&gt;&gt; 17 // 3 # floor division 5 &gt;&gt;&gt; 17 % 3 # remainder 2 &gt;&gt;&gt; 2 ** 7 # 2 to the power of 7 128  2. Strings  Unlike other languages, special characters such as \n have the same meaning with both single (&#39;...&#39;) and double (&quot;...&quot;) quotes. The only difference between the two is that within single quotes you don’t need to escape &quot; (but you have to escape \&#39;) and vice versa.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2017-05-16T22:32:05">
+  
+  
+    <meta property="article:modified_time" content="2017-05-16T22:32:05">
+  
+  
+  
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@brilliun">
+
+
+  <meta name="twitter:creator" content="@brilliun">
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="http://brilliun.com/images/myprofile.jpg">
+  <meta property="twitter:image" content="http://brilliun.com/images/myprofile.jpg">
+
+
+    <title>Python Notes</title>
+
+    <link rel="icon" href="http://brilliun.com/favicon.ico">
+    
+
+    
+
+    <link rel="canonical" href="http://brilliun.com/2017/05/python-notes/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="http://brilliun.com/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="http://brilliun.com/">Brilliun&#39;s Blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="http://brilliun.com/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="http://brilliun.com/images/myprofile.jpg" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="http://brilliun.com/#about">
+          <img class="sidebar-profile-picture" src="http://brilliun.com/images/myprofile.jpg" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Guangyao Liu</h4>
+        
+          <h5 class="sidebar-profile-bio">A father of two girls.</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/brilliun" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/">
+    
+      
+      
+      <span class="sidebar-button-desc"></span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://brilliun.com/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Python Notes
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2017-05-16T22:32:05&#43;09:00">
+        
+  May 16, 2017
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              
+
+<h1 id="table-of-contents">Table of Contents</h1><nav id="TableOfContents">
+<ul>
+<li><a href="#1-numeric-values">1. Numeric Values</a></li>
+<li><a href="#2-strings">2. Strings</a></li>
+<li><a href="#3-lists">3. Lists</a>
+<ul>
+<li><a href="#3-1-list-comprehensions">3.1 List Comprehensions</a></li>
+</ul></li>
+<li><a href="#4-functions">4. Functions</a>
+<ul>
+<li><a href="#4-1-functions-with-variable-number-of-arguments">4.1 Functions with Variable Number of Arguments</a>
+<ul>
+<li><a href="#4-1-1-default-values">4.1.1. Default Values</a></li>
+<li><a href="#4-1-2-keyword-arguments">4.1.2. Keyword Arguments</a></li>
+<li><a href="#4-1-3-arbitrary-argument-lists">4.1.3. Arbitrary Argument Lists</a></li>
+</ul></li>
+<li><a href="#4-2-unpacking-argument-lists">4.2 Unpacking Argument Lists</a></li>
+<li><a href="#4-3-lambda-expressions">4.3 Lambda Expressions</a></li>
+</ul></li>
+<li><a href="#5-tuples">5. Tuples</a></li>
+<li><a href="#6-modules">6. Modules</a></li>
+<li><a href="#7-classes">7. Classes</a>
+<ul>
+<li><a href="#7-1-scopes">7.1 Scopes</a></li>
+</ul></li>
+<li><a href="#8-others">8. Others</a>
+<ul>
+<li><a href="#8-1-generator">8.1 Generator</a></li>
+</ul></li>
+</ul>
+</nav>
+
+<h1 id="1-numeric-values">1. Numeric Values</h1>
+
+<pre><code>&gt;&gt;&gt; 17 // 3    # floor division
+5
+&gt;&gt;&gt; 17 % 3     # remainder
+2
+&gt;&gt;&gt; 2 ** 7  # 2 to the power of 7
+128
+</code></pre>
+
+<h1 id="2-strings">2. Strings</h1>
+
+<ul>
+<li><p>Unlike other languages, special characters such as <code>\n</code> have the same meaning with both single (<code>'...'</code>) and double (<code>&quot;...&quot;</code>) quotes. The only difference between the two is that within single quotes you don’t need to escape <code>&quot;</code> (but you have to escape <code>\'</code>) and vice versa.</p></li>
+
+<li><p>If you don’t want characters prefaced by <code>\</code> to be interpreted as special characters, you can use raw strings by adding an <code>r</code> before the first quote:</p></li>
+</ul>
+
+<pre><code>&gt;&gt;&gt; print('C:\some\name')  # here \n means newline!
+C:\some
+ame
+&gt;&gt;&gt; print(r'C:\some\name')  # note the r before the quote
+C:\some\name
+</code></pre>
+
+<ul>
+<li>Python strings cannot be changed — they are immutable</li>
+</ul>
+
+<h1 id="3-lists">3. Lists</h1>
+
+<ul>
+<li><p>lists are a mutable type, i.e. it is possible to change their content</p></li>
+
+<li><p>To iterate over the indices of a sequence, you can combine <code>range()</code> and <code>len()</code> as follows:</p>
+
+<pre><code>&gt;&gt;&gt; a = ['Mary', 'had', 'a', 'little', 'lamb']
+&gt;&gt;&gt; for i in range(len(a)):
+...     print(i, a[i])
+...
+0 Mary
+1 had
+2 a
+3 little
+4 lamb
+</code></pre>
+
+<p>Or use the <code>enumerate(list, start=0)</code> function:</p>
+
+<pre><code>&gt;&gt;&gt; seasons = ['Spring', 'Summer', 'Fall', 'Winter']
+&gt;&gt;&gt; list(enumerate(seasons))
+[(0, 'Spring'), (1, 'Summer'), (2, 'Fall'), (3, 'Winter')]
+</code></pre></li>
+</ul>
+
+<h2 id="3-1-list-comprehensions">3.1 List Comprehensions</h2>
+
+<p>Examples:</p>
+
+<pre><code>squares = [x**2 for x in range(10)]
+</code></pre>
+
+<pre><code>&gt;&gt;&gt; [(x, y) for x in [1,2,3] for y in [3,1,4] if x != y]
+[(1, 3), (1, 4), (2, 3), (2, 1), (2, 4), (3, 1), (3, 4)]
+</code></pre>
+
+<h1 id="4-functions">4. Functions</h1>
+
+<ul>
+<li><p>Global variables may be referenced, but cannot be assigned a value within a function (because they will be treated as local variables) unless named in a global statement.</p></li>
+
+<li><p>Arguments are passed using <em>call by value</em> (where the value is always an <em>object reference</em>, not the value of the object).</p></li>
+
+<li><p>Functions without a <code>return</code> statement returns <code>None</code></p></li>
+</ul>
+
+<h2 id="4-1-functions-with-variable-number-of-arguments">4.1 Functions with Variable Number of Arguments</h2>
+
+<p>There are three forms, which can be combined.</p>
+
+<h3 id="4-1-1-default-values">4.1.1. Default Values</h3>
+
+<p>For example:</p>
+
+<pre><code>def ask_ok(prompt, retries=4, reminder='Please try again!'):
+</code></pre>
+
+<p>Default values are evaluated at the point of function definition in the defining scope, so that</p>
+
+<pre><code>i = 5
+
+def f(arg=i):
+    print(arg)
+
+i = 6
+f() # will print 5
+</code></pre>
+
+<p>The default value is evaluated only once. This makes a difference when the default is a mutable object such as a list. For example</p>
+
+<pre><code>def f(a, L=[]):
+    L.append(a)
+    return L
+
+print(f(1))  # [1]
+print(f(2))  # [1, 2]
+print(f(3))  # [1, 2, 3]
+</code></pre>
+
+<h3 id="4-1-2-keyword-arguments">4.1.2. Keyword Arguments</h3>
+
+<p>Can rearrange the order of arguments by specifying them in the form <code>func(kwarg3=val3, kwarg1=val1, kwarg2=val2)</code>.</p>
+
+<p>Also, we have the form <code>def func(a, **kwargs)</code>
+to hold all passed keyword arguments in a dict.</p>
+
+<h3 id="4-1-3-arbitrary-argument-lists">4.1.3. Arbitrary Argument Lists</h3>
+
+<p><code>def func(a, *args)</code></p>
+
+<h2 id="4-2-unpacking-argument-lists">4.2 Unpacking Argument Lists</h2>
+
+<pre><code>&gt;&gt;&gt; def func(a, b='1', c='2')
+...    print(a, b, c)
+
+d = {&quot;a&quot;: 0, &quot;b&quot;: 1, &quot;c&quot;: 2}
+func(**d)
+</code></pre>
+
+<h2 id="4-3-lambda-expressions">4.3 Lambda Expressions</h2>
+
+<p>Small anonymous functions can be created with the lambda keyword.</p>
+
+<h1 id="5-tuples">5. Tuples</h1>
+
+<ul>
+<li>Tuples are immutable</li>
+</ul>
+
+<h1 id="6-modules">6. Modules</h1>
+
+<ul>
+<li>A module can contain executable statements as well as function definitions.
+
+<ul>
+<li>functions can be called by <code>module_name.func_name()</code></li>
+<li>statements are executed only the first time the module is imported.</li>
+</ul></li>
+<li><code>from module_name import *</code> imports all names except those beginning with an underscore (_).</li>
+<li>The built-in function <code>dir(module_name)</code> is used to find out which names a module defines. It returns a sorted list of strings</li>
+</ul>
+
+<h1 id="7-classes">7. Classes</h1>
+
+<ul>
+<li>Inheritance of multiple base classes is allowed.</li>
+</ul>
+
+<h2 id="7-1-scopes">7.1 Scopes</h2>
+
+<ul>
+<li>Directly used variable
+
+<ul>
+<li>read: search-up from local until global</li>
+<li>write: create variable in local scope</li>
+</ul></li>
+<li><code>nonlocal</code>: search-up <em>except</em> global</li>
+<li><code>global</code>: search in global scope <em>only</em></li>
+</ul>
+
+<h1 id="8-others">8. Others</h1>
+
+<h2 id="8-1-generator">8.1 Generator</h2>
+
+<p>A function which returns a generator iterator. It looks like a normal function except that it contains yield expressions for producing a series of values usable in a for-loop or that can be retrieved one at a time with the next() function.</p>
+
+<pre><code>def reverse(data):
+    for index in range(len(data)-1, -1, -1):
+        yield data[index]
+
+for char in reverse('golf'):
+    print(char)
+
+</code></pre>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="http://brilliun.com/2017/06/git-cleanup-local-branches-merged/" data-tooltip="Git Cleanup Local Branches Merged">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="http://brilliun.com/2017/02/ssl-vs-ssh/" data-tooltip="Ssl vs Ssh">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://brilliun.com/2017/05/python-notes/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://brilliun.com/2017/05/python-notes/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Guangyao Liu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="http://brilliun.com/2017/06/git-cleanup-local-branches-merged/" data-tooltip="Git Cleanup Local Branches Merged">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="http://brilliun.com/2017/02/ssl-vs-ssh/" data-tooltip="Ssl vs Ssh">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://brilliun.com/2017/05/python-notes/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://brilliun.com/2017/05/python-notes/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fbrilliun.com%2F2017%2F05%2Fpython-notes%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http%3A%2F%2Fbrilliun.com%2F2017%2F05%2Fpython-notes%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="http://brilliun.com/images/myprofile.jpg" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Guangyao Liu</h4>
+    
+      <div id="about-card-bio">A father of two girls.</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Software Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Tokyo, Japan
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2018/06/implementation-of-api-pagination/">
+                <h3 class="media-heading">Implementation of Api Pagination</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Overview Stable pagination is not a silver bullet. Consider sites like Reddit and Hacker News. Their pagination is inherently unstable: items are sorted by a volatile ranking, frequently moving up and down the list over time. How do they deal with it? They don&rsquo;t.
+Both sites frequently showcases how bad it can look by showing duplicate items as you advance pages. It&rsquo;s not all that bad, because neither site subscribes to the infinite scrolling crowd (yet?</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2018/05/designing-data-intensive-applications-part1/">
+                <h3 class="media-heading">Designing Data Intensive Applications Part1</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">CH01. Reliable, Scalable, and Maintainable Applications About Data System We can think of any kind of databases, queues, or caches as a data system. Nowadays, these tools are optimized for a variety of different uses, and they no longer neatly fit into their origin categories
+For example, there are data stores that are also used as message queues (Redis), and there are message queues with database-like durability guarantees (Apache Kafka).</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2018/04/the-innodb-storage-engine/">
+                <h3 class="media-heading">The Innodb Storage Engine</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Starting from MySQL 5.5.5, the default storage engine for new tables is InnoDB rather than MyISAM.
+Multi-Version Concurrency Control (MVCC) This technique lets InnoDB transactions with certain isolation levels perform consistent read operations; that is, to query rows that are being updated by other transactions, and see the values from before those updates occurred. This is a powerful technique to increase concurrency, by allowing queries to proceed without waiting due to locks held by the other transactions.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/06/git-cleanup-local-branches-merged/">
+                <h3 class="media-heading">Git Cleanup Local Branches Merged</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">TL;DR $ git branch --merged develop | egrep -v &quot;(^\*|master|dev)&quot; | xargs -n 1 git branch -d  BTW git branch --no-merged  can be used to check the branches to keep.
+Breakdown 1. Find branches merged # list up branches merged into 'develop' git branch --merged develop  OR
+# list up branches merged into current branch git branch --merged  2. Exclude critical branches # Exclude branches with prefix of &quot;*&quot;(current), &quot;master&quot;, or &quot;dev&quot; egrep -v &quot;(^\*|master|dev)&quot;  **egrep is equivalent to grep -E</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/05/python-notes/">
+                <h3 class="media-heading">Python Notes</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">1. Numeric Values &gt;&gt;&gt; 17 // 3 # floor division 5 &gt;&gt;&gt; 17 % 3 # remainder 2 &gt;&gt;&gt; 2 ** 7 # 2 to the power of 7 128  2. Strings  Unlike other languages, special characters such as \n have the same meaning with both single ('...') and double (&quot;...&quot;) quotes. The only difference between the two is that within single quotes you don’t need to escape &quot; (but you have to escape \') and vice versa.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/02/ssl-vs-ssh/">
+                <h3 class="media-heading">Ssl vs Ssh</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Concepts  SSL: Secure Sockets Layer
+TLS: Transport Layer Security (TLS is the name of the IETF protocol standard that grew out of SSL 3.0)
+HTTPS: HyperText Transfer Protocol over SSL/TLS
+SSH: Secure Shell
+ HTTPS is the secure replacement for HTTP, while SSH is the secure replacement for Telnet.
+Similarity  Both SSH and SSL use symmetric cryptography to preserve the confidentiality of transmitted data. They both use asymmetric cryptography a.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/02/algorithms-and-data-structures/">
+                <h3 class="media-heading">Algorithms and Data Structures</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Time Complexity Usually only the worst-case running time is considered because:
+ it gives an upper bound For many situations, the worst case occurs fairly often. (Eg. searching for items which may frequently be absent) The average case is often as bad as worst case (:TO-CHECK:)  To easily describe the performance of an algorithm, we usually use order of growth, e.g., O(n^2).
+Sorting Algorithms Comparison of sorting algorithms</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/01/how-browsers-work/">
+                <h3 class="media-heading">How Browsers Work</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Prior Knowledge There are 3 main tasks for a browser to execute a web application:
+ Fetching resources Page layout and rendering Javascript execution  Browsers And Browser Kernels Comparison of web browser engines
+(WebKit)  Web layout engine: WebCore Javascript engine: JavascriptCore  Chrome  Web layout engine: Blink  Originally forked from WebCore, a component of WebKit  Javascript engine: V8  Safari  Web layout engine: WebCore Javascript engine: JavascriptCore  later evolved to Nitro, which compiles JavaScript into native machine code   Firefox  Web layout engine: Gecko Javascript engine: SpiderMonkey  Microsoft Edge  Web layout engine: EdgeHTML  forked from Trident, the engine of IE  Javascript engine: Chakra  Fetching Resources Prior Knowledge URL And URI Socket IP Protocol MAC Address Fetching from Cache Given the URL of a resource on the web, the browser starts by checking its local and application caches.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2017/01/tips-for-coding-interviews/">
+                <h3 class="media-heading">Tips for Coding Interviews</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Primer  When target is string, confirm whether it&rsquo;s ASCII, which at most has 256 possible characters. So use space to boost time performance.
+ whenever only flags or booleans in an array, use bit vector instead for better space complexity.
+ For linked list problems, usually a pair of slow pointer and fast pointer would be a nice try.gb
+  Tree Depth/Height  To get the height (from leaf) of each node in a binary tree, use following recursive code:  function getHeight(TreeNode curr) { if (curr == null) return 0; return Math.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://brilliun.com/2016/12/high-performance-browser-networking/">
+                <h3 class="media-heading">High Performance Browser Networking</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2016
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Ch01. Primer on Latency and Bandwidth  Latency
+The time from the source sending a packet to the destination receiving it
+Bandwidth
+Maximum throughput of a logical or physical communication path
+ Latency, not bandwidth, is the performance bottleneck for most web‐ sites!
+To increase bandwidth, while it might not be cheap, we have multiple strategies available, like adding more fiber links.
+Improving latency, on the other hand, is a very different story.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         14 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('http://brilliun.com/images/mycover.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="http://brilliun.com/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'http:\/\/brilliun.com\/2017\/05\/python-notes\/';
+          
+            this.page.identifier = '\/2017\/05\/python-notes\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'brilliun';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+
