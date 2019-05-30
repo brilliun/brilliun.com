@@ -44,6 +44,7 @@ Total in 177 ms
 $ hugo new post/my-first-post.md
 ```
 
+## Serve The Contents
 
 ### Start the Hugo Server
 
