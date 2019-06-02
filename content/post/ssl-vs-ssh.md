@@ -1,5 +1,5 @@
 ---
-title: "Ssl vs Ssh"
+title: "SSL and SSH"
 date: 2017-02-19T22:33:18+09:00
 lastmod: 2017-02-19T22:33:18+09:00
 draft: false

@@ -1,5 +1,5 @@
 ---
-title: "The Innodb Storage Engine"
+title: "The InnoDB Storage Engine"
 date: 2018-04-14T22:23:45+09:00
 lastmod: 2018-04-14T22:23:45+09:00
 draft: false

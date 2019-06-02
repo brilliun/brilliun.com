@@ -12,7 +12,7 @@
     
     
     <item>
-      <title>Implementation of Api Pagination</title>
+      <title>Implementation of API Pagination</title>
       <link>http://brilliun.com/2018/06/implementation-of-api-pagination/</link>
       <pubDate>Thu, 14 Jun 2018 22:20:53 +0900</pubDate>
       
@@ -32,7 +32,7 @@ For example, there are data stores that are also used as message queues (Redis),
     </item>
     
     <item>
-      <title>The Innodb Storage Engine</title>
+      <title>The InnoDB Storage Engine</title>
       <link>http://brilliun.com/2018/04/the-innodb-storage-engine/</link>
       <pubDate>Sat, 14 Apr 2018 22:23:45 +0900</pubDate>
       
@@ -62,11 +62,11 @@ Breakdown 1. Find branches merged # list up branches merged into &#39;develop&#3
     </item>
     
     <item>
-      <title>Ssl vs Ssh</title>
-      <link>http://brilliun.com/2017/02/ssl-vs-ssh/</link>
+      <title>SSL and SSH</title>
+      <link>http://brilliun.com/2017/02/ssl-and-ssh/</link>
       <pubDate>Sun, 19 Feb 2017 22:33:18 +0900</pubDate>
       
-      <guid>http://brilliun.com/2017/02/ssl-vs-ssh/</guid>
+      <guid>http://brilliun.com/2017/02/ssl-and-ssh/</guid>
       <description>Concepts  SSL: Secure Sockets Layer
 TLS: Transport Layer Security (TLS is the name of the IETF protocol standard that grew out of SSL 3.0)
 HTTPS: HyperText Transfer Protocol over SSL/TLS
@@ -125,7 +125,7 @@ Improving latency, on the other hand, is a very different story.</description>
     </item>
     
     <item>
-      <title>Webgl Part4</title>
+      <title>WebGL Part4</title>
       <link>http://brilliun.com/2015/12/webgl-part4/</link>
       <pubDate>Sun, 06 Dec 2015 22:39:17 +0900</pubDate>
       
@@ -136,7 +136,7 @@ Improving latency, on the other hand, is a very different story.</description>
     </item>
     
     <item>
-      <title>Webgl Part3</title>
+      <title>WebGL Part3</title>
       <link>http://brilliun.com/2015/10/webgl-part3/</link>
       <pubDate>Mon, 05 Oct 2015 22:40:37 +0900</pubDate>
       
@@ -147,7 +147,7 @@ Improving latency, on the other hand, is a very different story.</description>
     </item>
     
     <item>
-      <title>Webgl Part2</title>
+      <title>WebGL Part2</title>
       <link>http://brilliun.com/2015/10/webgl-part2/</link>
       <pubDate>Sat, 03 Oct 2015 22:41:51 +0900</pubDate>
       
@@ -162,7 +162,7 @@ Improving latency, on the other hand, is a very different story.</description>
     </item>
     
     <item>
-      <title>Webgl Part1</title>
+      <title>WebGL Part1</title>
       <link>http://brilliun.com/2015/10/webgl-part1/</link>
       <pubDate>Fri, 02 Oct 2015 22:42:48 +0900</pubDate>
       

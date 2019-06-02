@@ -1,5 +1,5 @@
 ---
-title: "Webgl Part3"
+title: "WebGL Part3"
 date: 2015-10-05T22:40:37+09:00
 lastmod: 2015-10-05T22:40:37+09:00
 draft: false
