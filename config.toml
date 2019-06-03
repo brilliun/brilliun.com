@@ -21,6 +21,7 @@ disqusShortname = "brilliun"
 # googleAnalytics = "UA-123-45"
 paginate = 7
 canonifyurls = true
+enableRobotsTXT = true
 
 [permalinks]
   post = "/:year/:month/:slug/"
