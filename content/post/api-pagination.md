@@ -5,9 +5,8 @@ lastmod: 2018-06-14T22:20:53+09:00
 
 description: ""
 keywords: []
-tags: []
-categories: []
-author: ""
+tags: ['REST', 'API']
+categories: ['Learning']
 draft: false
 isCJKLanguage: false
 

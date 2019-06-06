@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cryptography on Brilliun&#39;s Blog</title>
+    <link>https://brilliun.com/tags/cryptography/</link>
+    <description>Recent content in Cryptography on Brilliun&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 19 Feb 2017 22:33:18 +0900</lastBuildDate>
+    
+	<atom:link href="https://brilliun.com/tags/cryptography/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SSL and SSH</title>
+      <link>https://brilliun.com/2017/02/ssl-and-ssh/</link>
+      <pubDate>Sun, 19 Feb 2017 22:33:18 +0900</pubDate>
+      
+      <guid>https://brilliun.com/2017/02/ssl-and-ssh/</guid>
+      <description>Concepts  SSL: Secure Sockets Layer
+TLS: Transport Layer Security (TLS is the name of the IETF protocol standard that grew out of SSL 3.0)
+HTTPS: HyperText Transfer Protocol over SSL/TLS
+SSH: Secure Shell
+ HTTPS is the secure replacement for HTTP, while SSH is the secure replacement for Telnet.
+Similarity  Both SSH and SSL use symmetric cryptography to preserve the confidentiality of transmitted data. They both use asymmetric cryptography a.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Reading on Brilliun&#39;s Blog</title>
+    <link>https://brilliun.com/categories/reading/</link>
+    <description>Recent content in Reading on Brilliun&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 14 May 2018 22:22:54 +0900</lastBuildDate>
+    
+	<atom:link href="https://brilliun.com/categories/reading/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Designing Data Intensive Applications Part1</title>
+      <link>https://brilliun.com/2018/05/designing-data-intensive-applications-part1/</link>
+      <pubDate>Mon, 14 May 2018 22:22:54 +0900</pubDate>
+      
+      <guid>https://brilliun.com/2018/05/designing-data-intensive-applications-part1/</guid>
+      <description>CH01. Reliable, Scalable, and Maintainable Applications About Data System We can think of any kind of databases, queues, or caches as a data system. Nowadays, these tools are optimized for a variety of different uses, and they no longer neatly fit into their origin categories
+For example, there are data stores that are also used as message queues (Redis), and there are message queues with database-like durability guarantees (Apache Kafka).</description>
+    </item>
+    
+    <item>
+      <title>High Performance Browser Networking</title>
+      <link>https://brilliun.com/2016/12/high-performance-browser-networking/</link>
+      <pubDate>Wed, 14 Dec 2016 22:38:02 +0900</pubDate>
+      
+      <guid>https://brilliun.com/2016/12/high-performance-browser-networking/</guid>
+      <description>Ch01. Primer on Latency and Bandwidth  Latency
+The time from the source sending a packet to the destination receiving it
+Bandwidth
+Maximum throughput of a logical or physical communication path
+ Latency, not bandwidth, is the performance bottleneck for most web‐ sites!
+To increase bandwidth, while it might not be cheap, we have multiple strategies available, like adding more fiber links.
+Improving latency, on the other hand, is a very different story.</description>
+    </item>
+    
+  </channel>
+</rss>

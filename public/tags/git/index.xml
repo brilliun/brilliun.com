@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on Brilliun&#39;s Blog</title>
+    <link>https://brilliun.com/tags/git/</link>
+    <description>Recent content in Git on Brilliun&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 15 Jun 2017 10:42:21 +0900</lastBuildDate>
+    
+	<atom:link href="https://brilliun.com/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Git Cleanup Local Branches Merged</title>
+      <link>https://brilliun.com/2017/06/git-cleanup-local-branches-merged/</link>
+      <pubDate>Thu, 15 Jun 2017 10:42:21 +0900</pubDate>
+      
+      <guid>https://brilliun.com/2017/06/git-cleanup-local-branches-merged/</guid>
+      <description>TL;DR $ git branch --merged develop | egrep -v &amp;quot;(^\*|master|dev)&amp;quot; | xargs -n 1 git branch -d  BTW git branch --no-merged  can be used to check the branches to keep.
+Breakdown 1. Find branches merged # list up branches merged into &#39;develop&#39; git branch --merged develop  OR
+# list up branches merged into current branch git branch --merged  2. Exclude critical branches # Exclude branches with prefix of &amp;quot;*&amp;quot;(current), &amp;quot;master&amp;quot;, or &amp;quot;dev&amp;quot; egrep -v &amp;quot;(^\*|master|dev)&amp;quot;  **egrep is equivalent to grep -E</description>
+    </item>
+    
+  </channel>
+</rss>

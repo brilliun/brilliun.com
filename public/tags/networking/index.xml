@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Networking on Brilliun&#39;s Blog</title>
+    <link>https://brilliun.com/tags/networking/</link>
+    <description>Recent content in Networking on Brilliun&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 14 Dec 2016 22:38:02 +0900</lastBuildDate>
+    
+	<atom:link href="https://brilliun.com/tags/networking/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>High Performance Browser Networking</title>
+      <link>https://brilliun.com/2016/12/high-performance-browser-networking/</link>
+      <pubDate>Wed, 14 Dec 2016 22:38:02 +0900</pubDate>
+      
+      <guid>https://brilliun.com/2016/12/high-performance-browser-networking/</guid>
+      <description>Ch01. Primer on Latency and Bandwidth  Latency
+The time from the source sending a packet to the destination receiving it
+Bandwidth
+Maximum throughput of a logical or physical communication path
+ Latency, not bandwidth, is the performance bottleneck for most web‐ sites!
+To increase bandwidth, while it might not be cheap, we have multiple strategies available, like adding more fiber links.
+Improving latency, on the other hand, is a very different story.</description>
+    </item>
+    
+  </channel>
+</rss>

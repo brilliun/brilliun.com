@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data Structures on Brilliun&#39;s Blog</title>
+    <link>https://brilliun.com/tags/data-structures/</link>
+    <description>Recent content in Data Structures on Brilliun&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 14 Feb 2017 22:34:46 +0900</lastBuildDate>
+    
+	<atom:link href="https://brilliun.com/tags/data-structures/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Algorithms and Data Structures</title>
+      <link>https://brilliun.com/2017/02/algorithms-and-data-structures/</link>
+      <pubDate>Tue, 14 Feb 2017 22:34:46 +0900</pubDate>
+      
+      <guid>https://brilliun.com/2017/02/algorithms-and-data-structures/</guid>
+      <description>Time Complexity Usually only the worst-case running time is considered because:
+ it gives an upper bound For many situations, the worst case occurs fairly often. (Eg. searching for items which may frequently be absent) The average case is often as bad as worst case (:TO-CHECK:)  To easily describe the performance of an algorithm, we usually use order of growth, e.g., O(n^2).
+Sorting Algorithms Comparison of sorting algorithms</description>
+    </item>
+    
+    <item>
+      <title>Tips for Coding Interviews</title>
+      <link>https://brilliun.com/2017/01/tips-for-coding-interviews/</link>
+      <pubDate>Sat, 14 Jan 2017 22:35:47 +0900</pubDate>
+      
+      <guid>https://brilliun.com/2017/01/tips-for-coding-interviews/</guid>
+      <description>Primer  When target is string, confirm whether it&amp;rsquo;s ASCII, which at most has 256 possible characters. So use space to boost time performance.
+ whenever only flags or booleans in an array, use bit vector instead for better space complexity.
+ For linked list problems, usually a pair of slow pointer and fast pointer would be a nice try.gb
+  Tree Depth/Height  To get the height (from leaf) of each node in a binary tree, use following recursive code:  function getHeight(TreeNode curr) { if (curr == null) return 0; return Math.</description>
+    </item>
+    
+  </channel>
+</rss>

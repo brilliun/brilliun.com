@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mysql on Brilliun&#39;s Blog</title>
+    <link>https://brilliun.com/tags/mysql/</link>
+    <description>Recent content in Mysql on Brilliun&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 14 Apr 2018 22:23:45 +0900</lastBuildDate>
+    
+	<atom:link href="https://brilliun.com/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>The InnoDB Storage Engine</title>
+      <link>https://brilliun.com/2018/04/the-innodb-storage-engine/</link>
+      <pubDate>Sat, 14 Apr 2018 22:23:45 +0900</pubDate>
+      
+      <guid>https://brilliun.com/2018/04/the-innodb-storage-engine/</guid>
+      <description>Starting from MySQL 5.5.5, the default storage engine for new tables is InnoDB rather than MyISAM.
+Multi-Version Concurrency Control (MVCC) This technique lets InnoDB transactions with certain isolation levels perform consistent read operations; that is, to query rows that are being updated by other transactions, and see the values from before those updates occurred. This is a powerful technique to increase concurrency, by allowing queries to proceed without waiting due to locks held by the other transactions.</description>
+    </item>
+    
+  </channel>
+</rss>

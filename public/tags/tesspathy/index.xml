@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tesspathy on Brilliun&#39;s Blog</title>
+    <link>https://brilliun.com/tags/tesspathy/</link>
+    <description>Recent content in Tesspathy on Brilliun&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 05 Oct 2015 22:40:37 +0900</lastBuildDate>
+    
+	<atom:link href="https://brilliun.com/tags/tesspathy/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>WebGL Part3</title>
+      <link>https://brilliun.com/2015/10/webgl-part3/</link>
+      <pubDate>Mon, 05 Oct 2015 22:40:37 +0900</pubDate>
+      
+      <guid>https://brilliun.com/2015/10/webgl-part3/</guid>
+      <description>&lt;p&gt;WebGL === 性能提升 ?&lt;/p&gt;
+
+&lt;p&gt;提到WebGL大家最先想到的除了3D应用的渲染之外，另一个主要的共识就是使用WebGL会给图像性能带来颇大的提升，但是这个逻辑是怎么来的呢？而实际应用中是否真的只要切换成WebGL就能自然而然的立马得到想要的性能提升呢？&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>WebGL Part2</title>
+      <link>https://brilliun.com/2015/10/webgl-part2/</link>
+      <pubDate>Sat, 03 Oct 2015 22:41:51 +0900</pubDate>
+      
+      <guid>https://brilliun.com/2015/10/webgl-part2/</guid>
+      <description>&lt;p&gt;WebGL === 3D ?&lt;/p&gt;
+
+&lt;p&gt;这是最常见的一个误解。MDN上的&lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Tutorial/Getting_started_with_WebGL&#34;&gt;WebGL入门教程&lt;/a&gt;开篇第一句话就是：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;WebGL enables web content to use an API based on OpenGL ES 2.0 to perform 3D rendering in an HTML canvas in browsers that support it without the use of plug-ins.&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

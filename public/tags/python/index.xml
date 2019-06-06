@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Brilliun&#39;s Blog</title>
+    <link>https://brilliun.com/tags/python/</link>
+    <description>Recent content in Python on Brilliun&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 16 May 2017 22:32:05 +0900</lastBuildDate>
+    
+	<atom:link href="https://brilliun.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python Notes</title>
+      <link>https://brilliun.com/2017/05/python-notes/</link>
+      <pubDate>Tue, 16 May 2017 22:32:05 +0900</pubDate>
+      
+      <guid>https://brilliun.com/2017/05/python-notes/</guid>
+      <description>1. Numeric Values &amp;gt;&amp;gt;&amp;gt; 17 // 3 # floor division 5 &amp;gt;&amp;gt;&amp;gt; 17 % 3 # remainder 2 &amp;gt;&amp;gt;&amp;gt; 2 ** 7 # 2 to the power of 7 128  2. Strings  Unlike other languages, special characters such as \n have the same meaning with both single (&#39;...&#39;) and double (&amp;quot;...&amp;quot;) quotes. The only difference between the two is that within single quotes you don’t need to escape &amp;quot; (but you have to escape \&#39;) and vice versa.</description>
+    </item>
+    
+  </channel>
+</rss>

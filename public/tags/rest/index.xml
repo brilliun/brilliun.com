@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rest on Brilliun&#39;s Blog</title>
+    <link>https://brilliun.com/tags/rest/</link>
+    <description>Recent content in Rest on Brilliun&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 14 Jun 2018 22:20:53 +0900</lastBuildDate>
+    
+	<atom:link href="https://brilliun.com/tags/rest/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Implementation of API Pagination</title>
+      <link>https://brilliun.com/2018/06/implementation-of-api-pagination/</link>
+      <pubDate>Thu, 14 Jun 2018 22:20:53 +0900</pubDate>
+      
+      <guid>https://brilliun.com/2018/06/implementation-of-api-pagination/</guid>
+      <description>Overview Stable pagination is not a silver bullet. Consider sites like Reddit and Hacker News. Their pagination is inherently unstable: items are sorted by a volatile ranking, frequently moving up and down the list over time. How do they deal with it? They don&amp;rsquo;t.
+Both sites frequently showcases how bad it can look by showing duplicate items as you advance pages. It&amp;rsquo;s not all that bad, because neither site subscribes to the infinite scrolling crowd (yet?</description>
+    </item>
+    
+  </channel>
+</rss>

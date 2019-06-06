@@ -2,9 +2,8 @@
 title: "Algorithms and Data Structures"
 description: ""
 keywords: []
-tags: []
-categories: []
-author: ""
+tags: ['algorithms', 'data structures']
+categories: ['Learning']
 date: 2017-02-14T22:34:46+09:00
 lastmod: 2017-02-14T22:34:46+09:00
 draft: false

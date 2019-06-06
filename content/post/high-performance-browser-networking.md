@@ -5,39 +5,18 @@ lastmod: 2017-12-14T22:38:02+09:00
 draft: false
 keywords: []
 description: ""
-tags: []
-categories: []
-author: ""
+tags: ['networking', 'http', 'browsers']
+categories: ['Reading']
 
-# You can also close(false) or open(true) something for this content.
-# P.S. comment can only be closed
-comment: false
-toc: false
-autoCollapseToc: false
-postMetaInFooter: false
-hiddenFromHomePage: false
-# You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
-contentCopyright: false
-reward: false
-mathjax: false
-mathjaxEnableSingleDollar: false
-mathjaxEnableAutoNumber: false
+isCJKLanguage: false
 
-# You unlisted posts you might want not want the header or footer to show
-hideHeaderAndFooter: false
-
-# You can enable or disable out-of-date content warning for individual post.
-# Comment this out to use the global config.
-#enableOutdatedInfoWarning: false
-
-flowchartDiagrams:
-  enable: false
-  options: ""
-
-sequenceDiagrams: 
-  enable: false
-  options: ""
-
+comments: true
+showTags: true
+showPagination: true
+showSocial: true
+showDate: true
+showMeta: true
+showActions: true
 ---
 
 <!-- toc -->

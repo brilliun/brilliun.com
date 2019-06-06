@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Browsers on Brilliun&#39;s Blog</title>
+    <link>https://brilliun.com/tags/browsers/</link>
+    <description>Recent content in Browsers on Brilliun&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 14 Jan 2017 22:36:48 +0900</lastBuildDate>
+    
+	<atom:link href="https://brilliun.com/tags/browsers/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How Browsers Work</title>
+      <link>https://brilliun.com/2017/01/how-browsers-work/</link>
+      <pubDate>Sat, 14 Jan 2017 22:36:48 +0900</pubDate>
+      
+      <guid>https://brilliun.com/2017/01/how-browsers-work/</guid>
+      <description>Prior Knowledge There are 3 main tasks for a browser to execute a web application:
+ Fetching resources Page layout and rendering Javascript execution  Browsers And Browser Kernels Comparison of web browser engines
+(WebKit)  Web layout engine: WebCore Javascript engine: JavascriptCore  Chrome  Web layout engine: Blink  Originally forked from WebCore, a component of WebKit  Javascript engine: V8  Safari  Web layout engine: WebCore Javascript engine: JavascriptCore  later evolved to Nitro, which compiles JavaScript into native machine code   Firefox  Web layout engine: Gecko Javascript engine: SpiderMonkey  Microsoft Edge  Web layout engine: EdgeHTML  forked from Trident, the engine of IE  Javascript engine: Chakra  Fetching Resources Prior Knowledge URL And URI Socket IP Protocol MAC Address Fetching from Cache Given the URL of a resource on the web, the browser starts by checking its local and application caches.</description>
+    </item>
+    
+    <item>
+      <title>High Performance Browser Networking</title>
+      <link>https://brilliun.com/2016/12/high-performance-browser-networking/</link>
+      <pubDate>Wed, 14 Dec 2016 22:38:02 +0900</pubDate>
+      
+      <guid>https://brilliun.com/2016/12/high-performance-browser-networking/</guid>
+      <description>Ch01. Primer on Latency and Bandwidth  Latency
+The time from the source sending a packet to the destination receiving it
+Bandwidth
+Maximum throughput of a logical or physical communication path
+ Latency, not bandwidth, is the performance bottleneck for most web‐ sites!
+To increase bandwidth, while it might not be cheap, we have multiple strategies available, like adding more fiber links.
+Improving latency, on the other hand, is a very different story.</description>
+    </item>
+    
+    <item>
+      <title>WebGL Part4</title>
+      <link>https://brilliun.com/2015/12/webgl-part4/</link>
+      <pubDate>Sun, 06 Dec 2015 22:39:17 +0900</pubDate>
+      
+      <guid>https://brilliun.com/2015/12/webgl-part4/</guid>
+      <description>作为这个系列的最后一篇，我想谈一下自己对于WebGL这项技术的本质的理解。
+这里想要顺带提一下的是“Extensible Web”这个理念或者说运动。它的核心主要是下面两条准则：
+ Web标准应该越来越多地将各种相关的底层功能对Javascript开放 现有的高层特性应该尽可能地转化为可以由Javascript访问或者说控制  读上去比较抽象，通俗一点的解释就是不要再把Javascript程序当作幼儿一般“照料”和“限制”，稍微“危险”一点的事情要么禁止要么由监护人（浏览器）代劳。Javascript以及由其驱动的Web应用正在茁壮成长，以往只赋予native app的那些权限和能力今后应该尽可能多地对Javascript开放。值得欣慰的是，近年来web技术已经在这方面取得了长足的发展，看看 What Web Can Do Today 就能发现大部分以往专属于native app的功能如今在web应用中也能实现了。</description>
+    </item>
+    
+    <item>
+      <title>WebGL Part3</title>
+      <link>https://brilliun.com/2015/10/webgl-part3/</link>
+      <pubDate>Mon, 05 Oct 2015 22:40:37 +0900</pubDate>
+      
+      <guid>https://brilliun.com/2015/10/webgl-part3/</guid>
+      <description>&lt;p&gt;WebGL === 性能提升 ?&lt;/p&gt;
+
+&lt;p&gt;提到WebGL大家最先想到的除了3D应用的渲染之外，另一个主要的共识就是使用WebGL会给图像性能带来颇大的提升，但是这个逻辑是怎么来的呢？而实际应用中是否真的只要切换成WebGL就能自然而然的立马得到想要的性能提升呢？&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>WebGL Part1</title>
+      <link>https://brilliun.com/2015/10/webgl-part1/</link>
+      <pubDate>Fri, 02 Oct 2015 22:42:48 +0900</pubDate>
+      
+      <guid>https://brilliun.com/2015/10/webgl-part1/</guid>
+      <description>&lt;p&gt;谈一谈WebGL这个看上去很时髦但始终没有进入主流应用的技术。&lt;/p&gt;
+
+&lt;h3 id=&#34;为什么现在是时候考虑应用webgl了&#34;&gt;为什么现在是时候考虑应用WebGL了&lt;/h3&gt;
+
+&lt;p&gt;在WebGL的普及上最大的一个问题是开发者对浏览器支持的担忧。需要特别说明的是如果仍然需要用户手动的从某个菜单中选择“启用WebGL”那就不能算真正的“支持”。毕竟没有人有信心多少用户会愿意做这个举动并且成功找到这个菜单而不是直接认为这个网页很可疑从而离脱。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
