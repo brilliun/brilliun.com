@@ -6,10 +6,20 @@
     <description>Recent content on Brilliun&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 14 Jun 2018 22:20:53 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 05 Jun 2019 22:36:35 +0900</lastBuildDate>
     
 	<atom:link href="https://brilliun.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Building Microservices: Designing Fine-Grained Systems - Part I</title>
+      <link>https://brilliun.com/2019/06/building-microservices-designing-fine-grained-systems-part-i/</link>
+      <pubDate>Wed, 05 Jun 2019 22:36:35 +0900</pubDate>
+      
+      <guid>https://brilliun.com/2019/06/building-microservices-designing-fine-grained-systems-part-i/</guid>
+      <description>Chapter 1. Microservices Many organizations have found that by embracing fine-grained, microservice architectures, they can deliver software faster and embrace newer technologies. Microservices give us significantly more freedom to react and make different decisions, allowing us to respond faster to the inevitable change that impacts all of us.
+Chapter 3. How to Model Services To be able to work out the valuation of the company, though, the finance employees need information about the stock we hold.</description>
+    </item>
     
     <item>
       <title>Implementation of API Pagination</title>

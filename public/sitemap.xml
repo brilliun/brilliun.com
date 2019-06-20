@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://brilliun.com/2019/06/building-microservices-designing-fine-grained-systems-part-i/</loc>
+    <lastmod>2019-06-05T22:36:35+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://brilliun.com/2018/06/implementation-of-api-pagination/</loc>
     <lastmod>2018-06-14T22:20:53+09:00</lastmod>
   </url>
@@ -91,7 +96,7 @@
   
   <url>
     <loc>https://brilliun.com/</loc>
-    <lastmod>2018-06-14T22:20:53+09:00</lastmod>
+    <lastmod>2019-06-05T22:36:35+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -121,6 +126,12 @@
   <url>
     <loc>https://brilliun.com/tags/databases/</loc>
     <lastmod>2018-05-14T22:22:54+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://brilliun.com/tags/distributed-system/</loc>
+    <lastmod>2019-06-05T22:36:35+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -155,6 +166,12 @@
   </url>
   
   <url>
+    <loc>https://brilliun.com/tags/microservice/</loc>
+    <lastmod>2019-06-05T22:36:35+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://brilliun.com/tags/mysql/</loc>
     <lastmod>2018-04-14T22:23:45+09:00</lastmod>
     <priority>0</priority>
@@ -168,7 +185,7 @@
   
   <url>
     <loc>https://brilliun.com/post/</loc>
-    <lastmod>2018-06-14T22:20:53+09:00</lastmod>
+    <lastmod>2019-06-05T22:36:35+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -180,7 +197,7 @@
   
   <url>
     <loc>https://brilliun.com/categories/reading/</loc>
-    <lastmod>2018-05-14T22:22:54+09:00</lastmod>
+    <lastmod>2019-06-05T22:36:35+09:00</lastmod>
     <priority>0</priority>
   </url>
   
