@@ -99,7 +99,7 @@ For those services that serve up highly cachable data, it is common for the orig
 One way to protect the origin in such a situation is never to allow requests to go to the origin in the first place. Instead, the origin itself populates the cache asynchronously when needed, as shown in Figure 11-7. If a cache miss is caused, this triggers an event that the origin can pick up on, alerting it that it needs to repopulate the cache. So if an entire shard has vanished, we can rebuild the cache in the background. We could decide to block the original request waiting for the region to be repopulated, but this could cause contention on the cache itself, leading to further problems. It’s more likely if we are prioritizing keeping the system stable that we would fail the original request, but it would fail fast.
 
 ![Figure 11-7](/images/build-microservices/11-7.png)
-*Figure 11-7. Hiding the origin from the client and populating the cache asynchronously
+*Figure 11-7. Hiding the origin from the client and populating the cache asynchronously*
 
 ## CAP Theorem
 
