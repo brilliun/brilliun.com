@@ -1,0 +1,10 @@
+.post .post-content {
+    font-family: -apple-system,BlinkMacSystemFont,microsoft yahei,sans-serif;
+    line-height: 1.85;
+    letter-spacing: .01rem;
+}
+
+.postShorten .postShorten-content, .postShorten .postShorten-excerpt {
+	font: 1em/1.8 -apple-system,BlinkMacSystemFont,microsoft yahei,sans-serif;
+}
+

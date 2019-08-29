@@ -6,10 +6,30 @@
     <description>Recent content in Reading on Brilliun&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 Jun 2019 22:36:35 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 29 Aug 2019 23:36:35 +0900</lastBuildDate>
     
 	<atom:link href="https://brilliun.com/categories/reading/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Building Microservices: Designing Fine-Grained Systems - Part III</title>
+      <link>https://brilliun.com/2019/08/building-microservices-designing-fine-grained-systems-part-iii/</link>
+      <pubDate>Thu, 29 Aug 2019 23:36:35 +0900</pubDate>
+      
+      <guid>https://brilliun.com/2019/08/building-microservices-designing-fine-grained-systems-part-iii/</guid>
+      <description>Chapter 7. Testing Test Scope Trade-Offs When you’re reading the pyramid, the key thing to take away is that as you go up the pyramid, the test scope increases, as does our confidence that the functionality being tested works. On the other hand, the feedback cycle time increases as the tests take longer to run, and when a test fails it can be harder to determine which functionality has broken.</description>
+    </item>
+    
+    <item>
+      <title>Building Microservices: Designing Fine-Grained Systems - Part II</title>
+      <link>https://brilliun.com/2019/08/building-microservices-designing-fine-grained-systems-part-ii/</link>
+      <pubDate>Tue, 27 Aug 2019 23:36:35 +0900</pubDate>
+      
+      <guid>https://brilliun.com/2019/08/building-microservices-designing-fine-grained-systems-part-ii/</guid>
+      <description>Chapter 5. Splitting the Monolith Example: Breaking Foreign Key Relationships Our reporting code in the finance package will reach into the line item table to pull out the title for the SKU. It may also have a foreign key constraint from the ledger to the line item table, as we see in Figure 5-2.
+Figure 5-2. Foreign key relationship
+So how do we fix things here? Well, we need to make a change in two places.</description>
+    </item>
     
     <item>
       <title>Building Microservices: Designing Fine-Grained Systems - Part I</title>

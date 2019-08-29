@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://brilliun.com/2019/08/building-microservices-designing-fine-grained-systems-part-iii/</loc>
+    <lastmod>2019-08-29T23:36:35+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://brilliun.com/2019/08/building-microservices-designing-fine-grained-systems-part-ii/</loc>
+    <lastmod>2019-08-27T23:36:35+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://brilliun.com/2019/06/building-microservices-designing-fine-grained-systems-part-i/</loc>
     <lastmod>2019-06-05T22:36:35+09:00</lastmod>
   </url>
@@ -96,7 +106,7 @@
   
   <url>
     <loc>https://brilliun.com/</loc>
-    <lastmod>2019-06-05T22:36:35+09:00</lastmod>
+    <lastmod>2019-08-29T23:36:35+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -131,7 +141,7 @@
   
   <url>
     <loc>https://brilliun.com/tags/distributed-system/</loc>
-    <lastmod>2019-06-05T22:36:35+09:00</lastmod>
+    <lastmod>2019-08-29T23:36:35+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -167,7 +177,7 @@
   
   <url>
     <loc>https://brilliun.com/tags/microservice/</loc>
-    <lastmod>2019-06-05T22:36:35+09:00</lastmod>
+    <lastmod>2019-08-29T23:36:35+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -185,7 +195,7 @@
   
   <url>
     <loc>https://brilliun.com/post/</loc>
-    <lastmod>2019-06-05T22:36:35+09:00</lastmod>
+    <lastmod>2019-08-29T23:36:35+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -197,7 +207,7 @@
   
   <url>
     <loc>https://brilliun.com/categories/reading/</loc>
-    <lastmod>2019-06-05T22:36:35+09:00</lastmod>
+    <lastmod>2019-08-29T23:36:35+09:00</lastmod>
     <priority>0</priority>
   </url>
   
