@@ -84,6 +84,39 @@ There are quite a few factors to unpack here. Synchronous calls are simpler, and
 
 ## Remote Procedure Calls
 
+Remote procedure call refers to the technique of making a local call and having it execute on a remote service somewhere. Those RPC implementations that allow you to generate client and server stubs help you get started very, very fast. I can be sending content over a network boundary in no time at all. This is often one of the main selling points of RPC: its ease of use. The fact that I can just make a normal method call and theoretically ignore the rest is a huge boon.
+
+Some RPC implementations, though, do come with some downsides that can cause issues:
+
+### Technology Coupling
+
+Some RPC mechanisms, like Java RMI, are heavily tied to a specific platform, which can limit which technology can be used in the client and server. Thrift and protocol buffers have an impressive amount of support for alternative languages, which can reduce this downside somewhat, but be aware that sometimes RPC technology comes with restrictions on interoperability.
+
+### Local Calls Are Not Like Remote Calls 
+
+The core idea of RPC is to hide the complexity of a remote call. Many implementations of RPC, though, hide too much. The drive in some forms of RPC to make remote method calls look like local method calls hides the fact that these two things are very different. I can make large numbers of local, in-process calls without worrying overly about the performance. With RPC, though, the cost of marshalling and un-marshalling payloads can be significant, not to mention the time taken to send things over the network. This means you need to think differently about API design for remote interfaces versus local interfaces. Just taking a local API and trying to make it a service boundary without any more thought is likely to get you in trouble. In some of the worst examples, developers may be using remote calls without knowing it, if the abstraction is overly opaque.
+
+### Brittleness 
+
+Some of the most popular implementations of RPC can lead to some nasty forms of brittleness. Let’s consider a very simple Java interface that we have decided to make a remote API for our customer service, in this interface, createCustomer takes the first name, surname, and email address. What happens if we decide to allow the Customer object to also be created with just an email address? We could add a new method at this point pretty easily.
+
+The problem is that now we need to regenerate the client stubs too. Clients that want to consume the new method need the new stubs, and depending on the nature of the changes to the specification, consumers that don’t need the new method may also need to have their stubs upgraded too.
+
+There is another sort of brittleness, though. Let’s take a look at what our Customer object looks like: 
+
+```
+public class Customer implements Serializable {
+    private String firstName;
+    private String surname;
+    private String emailAddress;
+    private String age;
+}
+```
+
+Now, what if it turns out that although we expose the age field in our Customer objects, none of our consumers ever use it? We decide we want to remove this field. But if the server implementation removes age from its definition of this type, and we don’t do the same to all the consumers, then even though they never used the field, the code associated with deserializing the Customer object on the consumer side will break. To roll out this change, I would have to deploy both a new server and clients at the same time. This is a key challenge with any RPC mechanism that promotes the use of binary stub generation: you don’t get to separate client and server deployments. If you use this technology, lock-step releases may be in your future.
+
+### Is RPC Terrible?
+
 Modern mechanisms like protocol buffers or Thrift mitigate some of the sins of the past by avoiding the need for lock-step releases of client and server code.
 Just be aware of some of the potential pitfalls associated with RPC if you’re going to pick this model. Don’t abstract your remote calls to the point where the network is completely hidden, and ensure that you can evolve the server interface without having to insist on lock-step upgrades for clients.
 
