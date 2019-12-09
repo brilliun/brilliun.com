@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://brilliun.com/2019/12/designing-data-intensive-applications-part-ii/</loc>
+    <lastmod>2019-12-10T00:49:54+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://brilliun.com/2019/08/building-microservices-designing-fine-grained-systems-part-iii/</loc>
     <lastmod>2019-08-29T23:36:35+09:00</lastmod>
   </url>
@@ -106,7 +111,7 @@
   
   <url>
     <loc>https://brilliun.com/</loc>
-    <lastmod>2019-08-29T23:36:35+09:00</lastmod>
+    <lastmod>2019-12-10T00:49:54+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -135,7 +140,7 @@
   
   <url>
     <loc>https://brilliun.com/tags/database/</loc>
-    <lastmod>2019-12-09T21:12:54+09:00</lastmod>
+    <lastmod>2019-12-10T00:49:54+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -147,7 +152,7 @@
   
   <url>
     <loc>https://brilliun.com/tags/distributed-system/</loc>
-    <lastmod>2019-08-29T23:36:35+09:00</lastmod>
+    <lastmod>2019-12-10T00:49:54+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -201,7 +206,7 @@
   
   <url>
     <loc>https://brilliun.com/post/</loc>
-    <lastmod>2019-08-29T23:36:35+09:00</lastmod>
+    <lastmod>2019-12-10T00:49:54+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -213,7 +218,7 @@
   
   <url>
     <loc>https://brilliun.com/categories/reading/</loc>
-    <lastmod>2019-08-29T23:36:35+09:00</lastmod>
+    <lastmod>2019-12-10T00:49:54+09:00</lastmod>
     <priority>0</priority>
   </url>
   

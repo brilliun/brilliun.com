@@ -6,10 +6,21 @@
     <description>Recent content on Brilliun&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 29 Aug 2019 23:36:35 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 09 Dec 2019 21:48:35 +0900</lastBuildDate>
     
 	<atom:link href="https://brilliun.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Designing Data Intensive Applications - Part II</title>
+      <link>https://brilliun.com/2019/12/designing-data-intensive-applications-part-ii/</link>
+      <pubDate>Mon, 09 Dec 2019 21:48:35 +0900</pubDate>
+      
+      <guid>https://brilliun.com/2019/12/designing-data-intensive-applications-part-ii/</guid>
+      <description>CH03. Storage and Retrieval Why should application developers care how the database handles storage and retrieval internally? Because there is a big difference between storage engines that are optimized for transactional workloads and those that are optimized for analytics.
+There are two families of commonly used storage engines: log-structured storage engines, and page-oriented storage engines such as B-trees.
+Data Structures That Power Your Database Consider the world’s simplest database, implemented as two Bash functions:</description>
+    </item>
     
     <item>
       <title>Building Microservices: Designing Fine-Grained Systems - Part III</title>
