@@ -42,11 +42,11 @@ Chapter 3. How to Model Services To be able to work out the valuation of the com
     </item>
     
     <item>
-      <title>Designing Data Intensive Applications Part1</title>
-      <link>https://brilliun.com/2018/05/designing-data-intensive-applications-part1/</link>
-      <pubDate>Mon, 14 May 2018 22:22:54 +0900</pubDate>
+      <title>Designing Data Intensive Applications - Part I</title>
+      <link>https://brilliun.com/2019/06/designing-data-intensive-applications-part-i/</link>
+      <pubDate>Wed, 05 Jun 2019 22:36:35 +0900</pubDate>
       
-      <guid>https://brilliun.com/2018/05/designing-data-intensive-applications-part1/</guid>
+      <guid>https://brilliun.com/2019/06/designing-data-intensive-applications-part-i/</guid>
       <description>CH01. Reliable, Scalable, and Maintainable Applications About Data System We can think of any kind of databases, queues, or caches as a data system. Nowadays, these tools are optimized for a variety of different uses, and they no longer neatly fit into their origin categories
 For example, there are data stores that are also used as message queues (Redis), and there are message queues with database-like durability guarantees (Apache Kafka).</description>
     </item>

@@ -18,13 +18,13 @@
   </url>
   
   <url>
-    <loc>https://brilliun.com/2018/06/implementation-of-api-pagination/</loc>
-    <lastmod>2018-06-14T22:20:53+09:00</lastmod>
+    <loc>https://brilliun.com/2019/06/designing-data-intensive-applications-part-i/</loc>
+    <lastmod>2019-12-09T21:12:54+09:00</lastmod>
   </url>
   
   <url>
-    <loc>https://brilliun.com/2018/05/designing-data-intensive-applications-part1/</loc>
-    <lastmod>2018-05-14T22:22:54+09:00</lastmod>
+    <loc>https://brilliun.com/2018/06/implementation-of-api-pagination/</loc>
+    <lastmod>2018-06-14T22:20:53+09:00</lastmod>
   </url>
   
   <url>
@@ -134,8 +134,14 @@
   </url>
   
   <url>
+    <loc>https://brilliun.com/tags/database/</loc>
+    <lastmod>2019-12-09T21:12:54+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://brilliun.com/tags/databases/</loc>
-    <lastmod>2018-05-14T22:22:54+09:00</lastmod>
+    <lastmod>2018-04-14T22:23:45+09:00</lastmod>
     <priority>0</priority>
   </url>
   

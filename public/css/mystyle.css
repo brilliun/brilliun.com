@@ -1,6 +1,8 @@
 .post .post-content {
-    font-family: -apple-system,BlinkMacSystemFont,microsoft yahei,sans-serif;
-    line-height: 1.85;
+	color: rgba(0,0,0,0.8);
+    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+
+    line-height: 1.6;
     letter-spacing: .01rem;
 }
 
@@ -8,3 +10,8 @@
 	font: 1em/1.8 -apple-system,BlinkMacSystemFont,microsoft yahei,sans-serif;
 }
 
+@media only screen and (min-width: 768px) {
+	.post-content {
+		font-size: 2.0rem;
+	}
+}

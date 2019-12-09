@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Database on Brilliun&#39;s Blog</title>
+    <link>https://brilliun.com/tags/database/</link>
+    <description>Recent content in Database on Brilliun&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 05 Jun 2019 22:36:35 +0900</lastBuildDate>
+    
+	<atom:link href="https://brilliun.com/tags/database/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Designing Data Intensive Applications - Part I</title>
+      <link>https://brilliun.com/2019/06/designing-data-intensive-applications-part-i/</link>
+      <pubDate>Wed, 05 Jun 2019 22:36:35 +0900</pubDate>
+      
+      <guid>https://brilliun.com/2019/06/designing-data-intensive-applications-part-i/</guid>
+      <description>CH01. Reliable, Scalable, and Maintainable Applications About Data System We can think of any kind of databases, queues, or caches as a data system. Nowadays, these tools are optimized for a variety of different uses, and they no longer neatly fit into their origin categories
+For example, there are data stores that are also used as message queues (Redis), and there are message queues with database-like durability guarantees (Apache Kafka).</description>
+    </item>
+    
+  </channel>
+</rss>
